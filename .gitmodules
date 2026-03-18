@@ -1,0 +1,3 @@
+[submodule "Html.Shoplifting/SharedWebBoardgame"]
+	path = Html.Shoplifting/SharedWebBoardgame
+	url = https://github.com/dougbankspersonal/SharedWebBoardgame.git
