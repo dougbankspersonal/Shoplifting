@@ -70,34 +70,18 @@ body .boards {
   border-radius: 8px;
 }
 
-.schoolboy-board.player-0 {
-  background-color: #eeeeff;
-  border-color: #000044;
-}
 .schoolboy-board.player-0 .cards .cards-slots .card-slot {
   background-color: #ccccff;
 }
 
-.schoolboy-board.player-1 {
-  background-color: #ffeeee;
-  border-color: #440000;
-}
 .schoolboy-board.player-1 .cards .cards-slots .card-slot {
   background-color: #ffcccc;
 }
 
-.schoolboy-board.player-2 {
-  background-color: #eeffee;
-  border-color: #004400;
-}
 .schoolboy-board.player-2 .cards .cards-slots .card-slot {
   background-color: #ccffcc;
 }
 
-.schoolboy-board.player-3 {
-  background-color: #ffffee;
-  border-color: #444400;
-}
 .schoolboy-board.player-3 .cards .cards-slots .card-slot {
   background-color: #ffffcc;
 }

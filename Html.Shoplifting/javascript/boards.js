@@ -145,8 +145,8 @@ define([
     return modifiersNode;
   }
 
-  function addCardSlotNode(parent) {
-    debugLog("addCardSlotNode", "parent = ", JSON.stringify(parent));
+  function addCardSlotNode(parent, playerIndex) {
+    debugLog("addCardSlotNode", "playerIndex = ", playerIndex);
 
     var cardSlotNode = htmlUtils.addDiv(parent, ["card-slot"], "card-slot");
 
@@ -156,12 +156,14 @@ define([
     domStyle.set(cardSlotNode, {
       width: poofedHeight + "px",
       height: poofedWidth + "px",
+      "background-color": gameData.playerColorFamilies[playerIndex].medium,
+      "border-color": gameData.playerColorFamilies[playerIndex].dark,
     });
 
     return cardSlotNode;
   }
 
-  function addCardSlotsNode(parent, title, count) {
+  function addCardSlotsNode(parent, playerIndex, title, count) {
     // container for cards and title.
     var cardsNode = htmlUtils.addDiv(parent, ["cards"]);
 
@@ -171,7 +173,7 @@ define([
     // Container for cards.
     var cardSlotsNode = htmlUtils.addDiv(cardsNode, ["cards-slots"]);
     for (var i = 0; i < count; i++) {
-      addCardSlotNode(cardSlotsNode);
+      addCardSlotNode(cardSlotsNode, playerIndex);
     }
   }
 
@@ -208,6 +210,11 @@ define([
       boardId,
     );
 
+    domStyle.set(schoolboyBoardNode, {
+      backgroundColor: gameData.playerColorFamilies[playerIndex].light,
+      "border-color": gameData.playerColorFamilies[playerIndex].dark,
+    });
+
     htmlUtils.addDiv(
       schoolboyBoardNode,
       ["board-title"],
@@ -219,8 +226,18 @@ define([
       "cards-and-die-results",
     ]);
 
-    addCardSlotsNode(cardsAndDieResultsNode, "Treats", gameData.maxTreats);
-    addCardSlotsNode(cardsAndDieResultsNode, "Powers", gameData.maxPowers);
+    addCardSlotsNode(
+      cardsAndDieResultsNode,
+      playerIndex,
+      "Treats",
+      gameData.maxTreats,
+    );
+    addCardSlotsNode(
+      cardsAndDieResultsNode,
+      playerIndex,
+      "Powers",
+      gameData.maxPowers,
+    );
     addDieResultsNode(cardsAndDieResultsNode, schoolboyIndex);
 
     return schoolboyBoardNode;

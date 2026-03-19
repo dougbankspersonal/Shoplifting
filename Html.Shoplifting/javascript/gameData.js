@@ -116,6 +116,29 @@ define([], function () {
     }
   }
 
+  var playerColorFamilies = [
+    {
+      light: "#eeeeff",
+      medium: "#ccccff",
+      dark: "#000044",
+    },
+    {
+      light: "#ffeeee",
+      medium: "#ffcccc",
+      dark: "#440000",
+    },
+    {
+      light: "#eeffee",
+      medium: "#ccffcc",
+      dark: "#004400",
+    },
+    {
+      light: "#ffffcc",
+      medium: "#ffff99",
+      dark: "#444400",
+    },
+  ];
+
   setupCoreDieResultsBySchoolboyIndex();
 
   // This returned object becomes the defined value of this module
@@ -136,5 +159,7 @@ define([], function () {
 
     maxTreats: maxTreats,
     maxPowers: maxPowers,
+
+    playerColorFamilies: playerColorFamilies,
   };
 });
