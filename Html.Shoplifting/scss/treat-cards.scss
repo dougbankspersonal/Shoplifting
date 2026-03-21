@@ -1,0 +1,41 @@
+.card.back {
+  border-width: 30px;
+  border-radius: 30px;
+  border: solid;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 15px solid black;
+
+  .title {
+    font-family: Georgia, "Times New Roman", Times, serif;
+  }
+}
+
+.card.back.card-tier-0 {
+  border-color: #89783e;
+  background-color: #cec499;
+
+  .title {
+    font-size: 60px;
+  }
+}
+
+.card.back.card-tier-1 {
+  border-color: #585446;
+  background-color: #f1efe1;
+
+  .title {
+    font-size: 40px;
+  }
+}
+
+.card.back.card-tier-2 {
+  border-color: #f4ddd9;
+  background-color: rgb(214, 114, 103);
+
+  .title {
+    font-size: 30px;
+  }
+}
