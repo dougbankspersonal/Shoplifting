@@ -17,13 +17,4 @@
   background: linear-gradient(to bottom, #e6f0fa 0%, #dce9f5 100%);
 }
 
-span.die-roll {
-  font-size: 1.8em;
-  vertical-align: -0.2em;
-}
-
-span.icon-move {
-  vertical-align: 0.2em;
-}
-
 /*# sourceMappingURL=common.css.map */

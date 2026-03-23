@@ -25,6 +25,15 @@
   align-items: center;
   border: 15px solid black;
 
+  span.die-roll {
+    font-size: 1.8em;
+    vertical-align: -0.2em;
+  }
+
+  span.icon-move {
+    vertical-align: 0.2em;
+  }
+
   .title-wrapper {
     width: 90%;
     height: 60px;
@@ -35,6 +44,7 @@
     .title {
       font-size: 33px;
       margin-top: 10px;
+      font-weight: bold;
     }
   }
 
@@ -44,6 +54,8 @@
     height: auto;
     /* critical: prevent overrides */
     flex: 0 0 auto;
+    transform: scale(1.4);
+    transform-origin: center;
   }
 
   .points-and-stealing-wrapper {
@@ -58,7 +70,7 @@
 
 
     .points {
-      width: 45%;
+      width: 60%;
       background: linear-gradient(to bottom,
           #fdf3c6 0%,
           /* pale gold - lighter at top */
@@ -68,11 +80,13 @@
       border: solid black 3px;
       border-radius: 5px;
       box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+      padding-top: 5px;
+      padding-bottom: 5px;
       /* horizontal, vertical, blur, color */
     }
 
     .stealing {
-      width: 45%;
+      width: 30%;
       background: linear-gradient(to bottom,
           #a8fdcc 0%,
           /* pale gold - lighter at top */
@@ -82,13 +96,13 @@
       border: solid black 3px;
       border-radius: 5px;
       box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
-      /* horizontal, vertical, blur, color */
+      padding-top: 5px;
+      padding-bottom: 5px;
     }
   }
 
 
   .power {
-    font-size: 30px;
     margin-top: 10px;
     width: 90%;
     border: solid black 3px;
@@ -96,6 +110,12 @@
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
     font-family: "Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
     font-size: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
 

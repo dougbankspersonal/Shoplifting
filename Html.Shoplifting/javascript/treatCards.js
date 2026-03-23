@@ -90,7 +90,16 @@ define([
     var powerType = config.power.type;
     var powerNode = htmlUtils.addDiv(parent, ["power", powerType], "power");
 
-    utils.addDieConfigNode(powerNode, config.power);
+    // Depends on power type.
+    if (
+      powerType == types.powerTypes.modifier ||
+      powerType == types.powerTypes.core
+    ) {
+      // There is a die involved.
+      utils.addDieConfigNode(powerNode, config.power);
+    } else {
+      utils.addActionsNode(powerNode, config.power);
+    }
   }
 
   function addCardFrontAtIndex(parent, index) {

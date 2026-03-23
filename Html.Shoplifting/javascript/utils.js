@@ -12,8 +12,6 @@ define([
     genericUtils.createSeededGetZeroToOneRandomFunction(83743874);
 
   function maybeAppendIcons(returnString, somethingPrior, config, iconType) {
-    // Config should have a type.
-    console.assert(config.type, "config should have a type");
     debugLog("maybeAppendIcons", "config = ", JSON.stringify(config));
     debugLog("maybeAppendIcons", "iconType = ", iconType);
 
@@ -48,33 +46,28 @@ define([
     return [returnString, true];
   }
 
-  function addDieConfigNode(parent, dieConfig) {
-    debugLog("addDieConfigNode", "dieConfig = ", JSON.stringify(dieConfig));
-    debugLog("addDieConfigNode", "gameData = ", JSON.stringify(gameData));
-
-    // Core and modifier die configs must have a die roll.  If there isn't one,
-    // make one up.
-    // No one else has a die roll, that's fine.
-    var dieRoll = 0;
-    if (
-      dieConfig.type == types.powerTypes.core ||
-      dieConfig.type == types.powerTypes.modifier
-    ) {
-      dieRoll = dieConfig.dieRoll;
-      if (!dieRoll) {
-        dieRoll = genericUtils.getRandomIntInRange(
-          1,
-          gameData.numDieFaces,
-          getRandomZeroToOne,
-        );
-      }
+  function getDieRollFromConfig(config) {
+    var dieRoll = config.dieRoll;
+    if (!dieRoll) {
+      dieRoll = genericUtils.getRandomIntInRange(
+        1,
+        gameData.numDieFaces,
+        getRandomZeroToOne,
+      );
     }
+    return dieRoll;
+  }
 
+  function addActionsNode(parent, powerConfig, opt_dieRoll) {
     var evolvingString = "";
     var somethingPrior = false;
 
-    if (dieRoll) {
-      var index = dieRoll - 1;
+    if (opt_dieRoll) {
+      console.assert(
+        opt_dieRoll >= 1 && opt_dieRoll <= gameData.numDieFaces,
+        "Invalid die roll",
+      );
+      var index = opt_dieRoll - 1;
       var dieString = types.dieStrings[index];
       evolvingString = "<span class=die-roll>" + dieString + "</span>:";
     } else {
@@ -85,35 +78,47 @@ define([
     [evolvingString, somethingPrior] = maybeAppendIcons(
       evolvingString,
       somethingPrior,
-      dieConfig,
+      powerConfig,
       types.iconTypes.move,
     );
 
     [evolvingString, somethingPrior] = maybeAppendIcons(
       evolvingString,
       somethingPrior,
-      dieConfig,
+      powerConfig,
       types.iconTypes.noise,
     );
     [evolvingString, somethingPrior] = maybeAppendIcons(
       evolvingString,
       somethingPrior,
-      dieConfig,
+      powerConfig,
       types.iconTypes.steal,
     );
     [evolvingString, somethingPrior] = maybeAppendIcons(
       evolvingString,
       somethingPrior,
-      dieConfig,
+      powerConfig,
       types.iconTypes.reroll,
     );
 
     return htmlUtils.addDiv(
       parent,
-      ["die-interpretation"],
-      "die-interpretation-" + index,
+      ["actions"],
+      "actions-" + index,
       evolvingString,
     );
+  }
+
+  // Add a node describing what happens with a particular die roll.
+  // If the config has a die roll, use that.
+  // Otherwise use a random die roll.
+  function addDieConfigNode(parent, dieConfig) {
+    debugLog("addDieConfigNode", "dieConfig = ", JSON.stringify(dieConfig));
+    debugLog("addDieConfigNode", "gameData = ", JSON.stringify(gameData));
+
+    var dieRoll = getDieRollFromConfig(dieConfig);
+
+    return addActionsNode(parent, dieConfig, dieRoll);
   }
 
   function scaleTextInDivs(className) {
@@ -135,6 +140,7 @@ define([
   return {
     maybeAppendIcons: maybeAppendIcons,
     addDieConfigNode: addDieConfigNode,
+    addActionsNode: addActionsNode,
     scaleTextInDivs: scaleTextInDivs,
   };
 });

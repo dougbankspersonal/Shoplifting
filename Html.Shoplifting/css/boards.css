@@ -12,6 +12,10 @@ body .boards {
   border: 12px solid black;
   border-radius: 24px;
 }
+.schoolboy-board span.icon-move {
+  position: relative;
+  top: -14px;
+}
 .schoolboy-board .board-title {
   font-size: 40px;
   font-weight: bold;
@@ -37,7 +41,7 @@ body .boards {
   border-radius: 8px;
   flex-direction: column;
 }
-.schoolboy-board .cards-and-die-configs .all-die-configs .die-configs .die-interpretation {
+.schoolboy-board .cards-and-die-configs .all-die-configs .die-configs .actions {
   display: flex;
 }
 .schoolboy-board .cards-and-die-configs .all-die-configs .power.die-configs.modifier .modifier-container {

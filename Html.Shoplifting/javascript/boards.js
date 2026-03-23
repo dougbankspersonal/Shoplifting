@@ -136,7 +136,7 @@ define([
       schoolboyBoardNode,
       ["board-title"],
       null,
-      gameData.schoolboyNames[boardIndex],
+      types.schoolboyNames[boardIndex],
     );
 
     var cardsAndDieInterpretationsNode = htmlUtils.addDiv(schoolboyBoardNode, [

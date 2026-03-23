@@ -24,6 +24,13 @@
   align-items: center;
   border: 15px solid black;
 }
+.card.front span.die-roll {
+  font-size: 1.8em;
+  vertical-align: -0.2em;
+}
+.card.front span.icon-move {
+  vertical-align: 0.2em;
+}
 .card.front .title-wrapper {
   width: 90%;
   height: 60px;
@@ -34,6 +41,7 @@
 .card.front .title-wrapper .title {
   font-size: 33px;
   margin-top: 10px;
+  font-weight: bold;
 }
 .card.front .treat-image {
   width: 45%;
@@ -41,6 +49,8 @@
   height: auto;
   /* critical: prevent overrides */
   flex: 0 0 auto;
+  transform: scale(1.4);
+  transform-origin: center;
 }
 .card.front .points-and-stealing-wrapper {
   font-family: "Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
@@ -53,23 +63,25 @@
   gap: 10px;
 }
 .card.front .points-and-stealing-wrapper .points {
-  width: 45%;
+  width: 60%;
   background: linear-gradient(to bottom, #fdf3c6 0%, #f9e7a7 105%);
   border: solid black 3px;
   border-radius: 5px;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+  padding-top: 5px;
+  padding-bottom: 5px;
   /* horizontal, vertical, blur, color */
 }
 .card.front .points-and-stealing-wrapper .stealing {
-  width: 45%;
+  width: 30%;
   background: linear-gradient(to bottom, #a8fdcc 0%, #98fddc 100%);
   border: solid black 3px;
   border-radius: 5px;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
-  /* horizontal, vertical, blur, color */
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 .card.front .power {
-  font-size: 30px;
   margin-top: 10px;
   width: 90%;
   border: solid black 3px;
@@ -77,6 +89,12 @@
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
   font-family: "Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
   font-size: 20px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .card.back.card-tier-0,
