@@ -6,6 +6,8 @@ define([
   "sharedJavascript/htmlUtils",
   "sharedJavascript/debugLog",
   "javascript/gameData",
+  "javascript/types",
+  "javascript/utils",
   "dojo/domReady!",
 ], function (
   dom,
@@ -15,128 +17,28 @@ define([
   htmlUtils,
   debugLogModule,
   gameData,
+  types,
+  utils,
 ) {
   var debugLog = debugLogModule.debugLog;
 
-  function addNthSchoolboyRollPower(parent, index, rollPower) {
-    var rollString = gameData.dieStrings[index];
-    var moveCount = rollPower.move;
-    var noiseCount = rollPower.noise;
-    var stealCount = rollPower.steal;
-
-    var finalString = rollString + ": ";
-    for (var i = 0; i < moveCount; i++) {
-      finalString += gameData.mansShoeString;
-    }
-
-    finalString += "/ ";
-
-    for (var i = 0; i < noiseCount; i++) {
-      finalString += gameData.noiseString;
-    }
-
-    if (stealCount > 0) {
-      finalString += "/ ";
-      for (var i = 0; i < stealCount; i++) {
-        finalString += gameData.stealString;
-      }
-    }
-
-    var rollPowerNode = htmlUtils.addDiv(
-      parent,
-      ["roll-power"],
-      null,
-      finalString,
-    );
-    return rollPowerNode;
-  }
-
-  function addSchoolboyNode(
-    parent,
-    schoolboyRollPowers,
-    playerIndex,
-    boyIndex,
-  ) {
-    var nameIndex = playerIndex * gameData.boysPerPlayer + boyIndex;
-    var schoolboyName = gameData.schoolboyNames[nameIndex];
-
-    var schoolboyNode = htmlUtils.addDiv(parent, ["schoolboy"]);
-
-    htmlUtils.addDiv(schoolboyNode, ["schoolboy-name"], null, schoolboyName);
-
-    var configsNode = htmlUtils.addDiv(schoolboyNode, ["schoolboy-configs"]);
-
-    for (var i = 0; i < schoolboyRollPowers.length; i++) {
-      var schoolboyRollPower = schoolboyRollPowers[i];
-      addNthSchoolboyRollPower(configsNode, i, schoolboyRollPower);
-    }
-    return schoolboyNode;
-  }
-
-  function addDieResultFeature(returnString, somethingPrior, value, icon) {
-    value = value || 0;
-    debugLog("addDieResultFeature", "value = ", value);
-
-    if (value == 0) {
-      debugLog("addDieResultFeature", "value = 0");
-      return [returnString, somethingPrior];
-    }
-
-    if (somethingPrior) {
-      returnString += " /";
-    }
-
-    var signString = value > 0 ? "" : "-";
-    returnString += signString;
-    for (var i = 0; i < Math.abs(value); i++) {
-      returnString += icon;
-    }
-    return [returnString, true];
-  }
-
-  function addNthDieResultNode(parent, index, dieResult) {
-    var dieResultString = gameData.dieStrings[index] + ":";
-    var somethingPrior = false;
-
-    [dieResultString, somethingPrior] = addDieResultFeature(
-      dieResultString,
-      somethingPrior,
-      dieResult.move,
-      gameData.mansShoeString,
-    );
-    [dieResultString, somethingPrior] = addDieResultFeature(
-      dieResultString,
-      somethingPrior,
-      dieResult.noise,
-      gameData.noiseString,
-    );
-    [dieResultString, somethingPrior] = addDieResultFeature(
-      dieResultString,
-      somethingPrior,
-      dieResult.steal,
-      gameData.stealString,
-    );
-    return htmlUtils.addDiv(
-      parent,
-      ["die-result"],
-      "die-result-" + index,
-      dieResultString,
-    );
-  }
-
-  function addModifierDieResultsNode(parent) {
+  function addModifierConfigsNode(parent) {
     var modifiersNode = htmlUtils.addDiv(
       parent,
-      ["modifiers", "die-results"],
-      "modifiers",
+      ["power", "modifier", "die-configs"],
+      "modifier",
     );
 
-    var halfLength = Math.floor(gameData.modifierDieResults.length / 2);
+    var halfLength = Math.floor(gameData.modifierDieConfigs.length / 2);
 
     var containerNode = htmlUtils.addDiv(modifiersNode, ["modifier-container"]);
-    for (var i = 0; i < gameData.modifierDieResults.length; i++) {
-      var dieResult = gameData.modifierDieResults[i];
-      addNthDieResultNode(containerNode, i, dieResult);
+    for (var i = 0; i < gameData.modifierDieConfigs.length; i++) {
+      var modifierDieConfig = gameData.modifierDieConfigs[i];
+      utils.addDieConfigNode(
+        containerNode,
+        modifierDieConfig,
+        types.powerTypes.modifier,
+      );
       if (i == halfLength - 1) {
         containerNode = htmlUtils.addDiv(modifiersNode, ["modifier-container"]);
       }
@@ -177,25 +79,40 @@ define([
     }
   }
 
-  function addCoreDieResultsNode(parent, schoolboyIndex) {
-    debugLog("addCoreDieResultsNode", "schoolboyIndex  = ", schoolboyIndex);
+  function addCoreDieConfigsNode(parent, schoolboyIndex) {
+    debugLog("addCoreDieConfigsNode", "schoolboyIndex  = ", schoolboyIndex);
 
-    var coreDieResultsNode = htmlUtils.addDiv(parent, ["core", "die-results"]);
+    var coreDieConfigsNode = htmlUtils.addDiv(parent, [
+      "power",
+      "core",
+      "die-configs",
+    ]);
 
-    var dieResults = gameData.coreDieResultsBySchoolboyIndex[schoolboyIndex];
+    var dieConfigs = gameData.coreDieConfigsBySchoolboyIndex[schoolboyIndex];
+    debugLog(
+      "addCoreDieConfigsNode",
+      "dieConfigs  = ",
+      JSON.stringify(dieConfigs),
+    );
 
-    for (var i = 0; i < dieResults.length; i++) {
-      var dieResult = dieResults[i];
-      addNthDieResultNode(coreDieResultsNode, i, dieResult);
+    for (var i = 0; i < dieConfigs.length; i++) {
+      var dieConfig = dieConfigs[i];
+      utils.addDieConfigNode(
+        coreDieConfigsNode,
+        dieConfig,
+        types.powerTypes.core,
+      );
     }
-    return coreDieResultsNode;
+    return coreDieConfigsNode;
   }
 
-  function addDieResultsNode(parent, schoolboyIndex) {
-    var dieResultsNode = htmlUtils.addDiv(parent, ["all-die-results"]);
-    addModifierDieResultsNode(dieResultsNode);
-    addCoreDieResultsNode(dieResultsNode, schoolboyIndex);
-    return dieResultsNode;
+  function addAllDieInterpretationsNode(parent, schoolboyIndex) {
+    var allDieInterpretationsNode = htmlUtils.addDiv(parent, [
+      "all-die-configs",
+    ]);
+    addModifierConfigsNode(allDieInterpretationsNode);
+    addCoreDieConfigsNode(allDieInterpretationsNode, schoolboyIndex);
+    return allDieInterpretationsNode;
   }
 
   function addSchoolboyBoard(parent, playerIndex, schoolboyIndex) {
@@ -222,23 +139,20 @@ define([
       gameData.schoolboyNames[boardIndex],
     );
 
-    var cardsAndDieResultsNode = htmlUtils.addDiv(schoolboyBoardNode, [
-      "cards-and-die-results",
+    var cardsAndDieInterpretationsNode = htmlUtils.addDiv(schoolboyBoardNode, [
+      "cards-and-die-configs",
     ]);
 
     addCardSlotsNode(
-      cardsAndDieResultsNode,
+      cardsAndDieInterpretationsNode,
       playerIndex,
       "Treats",
       gameData.maxTreats,
     );
-    addCardSlotsNode(
-      cardsAndDieResultsNode,
-      playerIndex,
-      "Powers",
-      gameData.maxPowers,
+    addAllDieInterpretationsNode(
+      cardsAndDieInterpretationsNode,
+      schoolboyIndex,
     );
-    addDieResultsNode(cardsAndDieResultsNode, schoolboyIndex);
 
     return schoolboyBoardNode;
   }

@@ -20,7 +20,7 @@ body {
     margin-top: 12px;
   }
 
-  .cards-and-die-results {
+  .cards-and-die-configs {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -28,34 +28,28 @@ body {
     gap: 12px;
     padding: 12px;
 
-    .all-die-results {
+    .all-die-configs {
       display: flex;
       flex-direction: column;
       gap: 12px;
 
-      .die-results {
+      .die-configs {
         font-size: 60px;
         display: flex;
         border: 4px solid black;
         border-radius: 8px;
         flex-direction: column;
 
-        .die-result {
+        .die-interpretation {
           display: flex;
         }
       }
 
-      .die-results.modifiers {
-        background-color: #ffddbb;
-
+      .power.die-configs.modifier {
         .modifier-container {
           display: flex;
           flex-direction: row;
         }
-      }
-
-      .die-results.core {
-        background-color: #ffffff;
       }
     }
   }

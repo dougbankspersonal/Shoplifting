@@ -1,0 +1,42 @@
+.power {
+  border: solid black 5px;
+  border-radius: 10px;
+  font-weight: bold;
+  font-family: "Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+}
+
+.power.modifier {
+  background: linear-gradient(to bottom,
+      #ffe5b4 0%,
+      /* very light orange at top */
+      #ffd699 100%
+      /* slightly deeper light orange at bottom */
+    );
+}
+
+.power.core {
+  background: linear-gradient(to bottom,
+      #f3e8ff 0%,
+      /* very light lilac at top */
+      #e9dfff 100%
+      /* slightly deeper gentle lilac at bottom */
+    );
+}
+
+.power.one-shot {
+  background: linear-gradient(to bottom,
+      #e6f0fa 0%,
+      /* very light powder blue at top */
+      #dce9f5 100%
+      /* slightly deeper powder blue at bottom */
+    );
+}
+
+span.die-roll {
+  font-size: 1.8em;
+  vertical-align: -0.2em;
+}
+
+span.icon-move {
+  vertical-align: 0.2em;
+}

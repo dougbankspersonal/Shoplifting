@@ -1,11 +1,17 @@
 <html>
   <head>
+    <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../css/images.css" />
     <link rel="stylesheet" href="../css/treat-cards.css" />
     <link rel="stylesheet" href="../SharedWebBoardGame/css/card.css" />
     <link rel="stylesheet" href="../SharedWebBoardGame/css/main.css" />
     <link rel="stylesheet" href="../SharedWebBoardGame/css/image.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Allura&family=Chewy&family=Luckiest+Guy&display=swap"
+      rel="stylesheet"
+    />
     <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
     <style type="text/css"></style>
   </head>
@@ -41,12 +47,20 @@
         "sharedJavascript/genericUtils",
         "sharedJavascript/systemConfigs",
         "javascript/treatCards",
-      ], function (debugLog, genericUtils, systemConfigs, treatCards) {
+        "javascript/utils",
+      ], function (debugLog, genericUtils, systemConfigs, treatCards, utils) {
         var sc = systemConfigs.getCardSystemConfigs();
         systemConfigs.setSystemConfigs(sc);
 
         // No system configs...
         treatCards.addCards();
+
+        /*
+        // Run on page load
+        window.addEventListener("load", function () {
+          utils.scaleTextInDivs(".title");
+        });
+        */
       });
     </script>
   </body>

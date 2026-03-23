@@ -18,37 +18,31 @@ body .boards {
   text-align: center;
   margin-top: 12px;
 }
-.schoolboy-board .cards-and-die-results {
+.schoolboy-board .cards-and-die-configs {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 12px;
   padding: 12px;
 }
-.schoolboy-board .cards-and-die-results .all-die-results {
+.schoolboy-board .cards-and-die-configs .all-die-configs {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
-.schoolboy-board .cards-and-die-results .all-die-results .die-results {
+.schoolboy-board .cards-and-die-configs .all-die-configs .die-configs {
   font-size: 60px;
   display: flex;
   border: 4px solid black;
   border-radius: 8px;
   flex-direction: column;
 }
-.schoolboy-board .cards-and-die-results .all-die-results .die-results .die-result {
+.schoolboy-board .cards-and-die-configs .all-die-configs .die-configs .die-interpretation {
   display: flex;
 }
-.schoolboy-board .cards-and-die-results .all-die-results .die-results.modifiers {
-  background-color: #ffddbb;
-}
-.schoolboy-board .cards-and-die-results .all-die-results .die-results.modifiers .modifier-container {
+.schoolboy-board .cards-and-die-configs .all-die-configs .power.die-configs.modifier .modifier-container {
   display: flex;
   flex-direction: row;
-}
-.schoolboy-board .cards-and-die-results .all-die-results .die-results.core {
-  background-color: #ffffff;
 }
 .schoolboy-board .cards {
   display: flex;
