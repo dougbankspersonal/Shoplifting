@@ -8,17 +8,25 @@ body {
     .tokens-for-player {
       display: flex;
       flex-direction: row;
-
-      .token {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 50%;
-        border-style: solid;
-        border-width: 10px;
-        font-size: 50px;
-        font-weight: bold;
-      }
     }
   }
+}
+
+.token {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border-style: solid;
+  border-width: 10px;
+  font-size: 50px;
+  font-weight: bold;
+}
+
+.token.demerit {
+  font-size: 65px;
+}
+
+.token.noise {
+  font-size: 65px;
 }

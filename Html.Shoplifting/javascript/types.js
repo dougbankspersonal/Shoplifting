@@ -40,6 +40,7 @@ define([], function () {
   var saveIcon = "save";
   var rewardIcon = "reward";
   var rerollIcon = "reroll";
+  var demeritIcon = "demerit";
 
   var iconTypes = {
     move: moveIcon,
@@ -49,6 +50,7 @@ define([], function () {
     save: saveIcon,
     reward: rewardIcon,
     reroll: rerollIcon,
+    demerit: demeritIcon,
   };
 
   var iconStrings = {
@@ -59,6 +61,7 @@ define([], function () {
     [iconTypes.save]: "🕰️",
     [iconTypes.reward]: "😋",
     [iconTypes.reroll]: "🎲♻️",
+    [iconTypes.demerit]: "☠️",
   };
 
   // This returned object becomes the defined value of this module

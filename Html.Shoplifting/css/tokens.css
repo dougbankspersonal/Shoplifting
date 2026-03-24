@@ -5,19 +5,28 @@ body .tokens {
   display: flex;
   flex-direction: column;
 }
-body .tokens .tokens-for-player {
+body .tokens .row-of-tokens {
   display: flex;
   flex-direction: row;
-}
-body .tokens .tokens-for-player .token {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  border-style: solid;
-  border-width: 10px;
-  font-size: 50px;
-  font-weight: bold;
+
+  .token {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border-style: solid;
+    border-width: 10px;
+    font-size: 65px;
+    font-weight: bold;
+  }
+
+  .token.demerit {
+    font-size: 85px;
+  }
+
+  .token.noise {
+    font-size: 85px;
+  }
 }
 
 /*# sourceMappingURL=tokens.css.map */
