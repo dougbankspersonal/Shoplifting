@@ -34,28 +34,35 @@
     vertical-align: 0.2em;
   }
 
-  .title-wrapper {
-    width: 90%;
-    height: 60px;
+  .flavor {
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
+    width: 94%;
+    gap: 10px;
 
-    .title {
-      font-size: 33px;
-      margin-top: 10px;
-      font-weight: bold;
+    .title-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .title {
+        font-size: 22px;
+        margin-top: 10px;
+        font-weight: bold;
+      }
     }
-  }
 
-  .treat-image {
-    width: 45%;
-    aspect-ratio: 1 / 1;
-    height: auto;
-    /* critical: prevent overrides */
-    flex: 0 0 auto;
-    transform: scale(1.4);
-    transform-origin: center;
+    .treat-image {
+      width: 20%;
+      aspect-ratio: 1 / 1;
+      height: auto;
+      /* critical: prevent overrides */
+      flex: 0 0 auto;
+      transform: scale(1.4);
+      transform-origin: center;
+    }
   }
 
   .points-and-stealing-wrapper {

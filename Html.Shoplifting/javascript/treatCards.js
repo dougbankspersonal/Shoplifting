@@ -114,8 +114,14 @@ define([
       "card-front-" + index,
     );
 
-    var titleWrapperNode = htmlUtils.addDiv(
+    var flavorNode = htmlUtils.addDiv(
       cardFrontNode,
+      ["flavor"],
+      "flavor-" + index,
+    );
+
+    var titleWrapperNode = htmlUtils.addDiv(
+      flavorNode,
       ["title-wrapper"],
       "title-wrapper",
     );
@@ -128,7 +134,7 @@ define([
     );
 
     var imageNode = htmlUtils.addImage(
-      cardFrontNode,
+      flavorNode,
       ["treat-image", config.class],
       "treat-image-" + index,
     );

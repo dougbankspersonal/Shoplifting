@@ -31,20 +31,26 @@
 .card.front span.icon-move {
   vertical-align: 0.2em;
 }
-.card.front .title-wrapper {
-  width: 90%;
-  height: 60px;
+.card.front .flavor {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 94%;
+  gap: 10px;
+}
+.card.front .flavor .title-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.card.front .title-wrapper .title {
-  font-size: 33px;
+.card.front .flavor .title-wrapper .title {
+  font-size: 22px;
   margin-top: 10px;
   font-weight: bold;
 }
-.card.front .treat-image {
-  width: 45%;
+.card.front .flavor .treat-image {
+  width: 20%;
   aspect-ratio: 1/1;
   height: auto;
   /* critical: prevent overrides */

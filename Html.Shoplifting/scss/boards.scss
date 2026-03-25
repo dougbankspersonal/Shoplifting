@@ -4,6 +4,11 @@ body {
   .boards {
     display: flex;
     flex-direction: column;
+
+    .boards-row {
+      display: flex;
+      flex-direction: row;
+    }
   }
 }
 

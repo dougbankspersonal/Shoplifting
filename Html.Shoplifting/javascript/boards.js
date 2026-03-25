@@ -163,8 +163,9 @@ define([
     var boardsNode = htmlUtils.addDiv(bodyNode, ["boards"], "boards");
 
     for (var i = 0; i < gameData.numPlayers; i++) {
+      var boardsRowNode = htmlUtils.addDiv(boardsNode, ["boards-row"]);
       for (var j = 0; j < gameData.boysPerPlayer; j++) {
-        addSchoolboyBoard(boardsNode, i, j);
+        addSchoolboyBoard(boardsRowNode, i, j);
       }
     }
   }

@@ -5,6 +5,10 @@ body .boards {
   display: flex;
   flex-direction: column;
 }
+body .boards .boards-row {
+  display: flex;
+  flex-direction: row;
+}
 
 .schoolboy-board {
   display: flex;

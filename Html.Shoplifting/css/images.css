@@ -43,7 +43,7 @@ div.pseudo-image.flapjack {
 div.pseudo-image.eccles-cake {
   background-image: url("../images/treats2.png");
   background-size: 200% 200%;
-  background-position: 100% 100%;
+  background-position: 100% 90%;
 }
 
 div.pseudo-image.victoria-sponge {
@@ -61,13 +61,13 @@ div.pseudo-image.jam-tart {
 div.pseudo-image.biscuit {
   background-image: url("../images/treats3.png");
   background-size: 200% 200%;
-  background-position: 0% 100%;
+  background-position: 0% 90%;
 }
 
 div.pseudo-image.scone {
   background-image: url("../images/treats3.png");
   background-size: 200% 200%;
-  background-position: 100% 100%;
+  background-position: 100% 90%;
 }
 
 div.pseudo-image.sausage-roll {
@@ -91,7 +91,7 @@ div.pseudo-image.jammy-dodger {
 div.pseudo-image.battenberg {
   background-image: url("../images/treats4.png");
   background-size: 200% 200%;
-  background-position: 100% 100%;
+  background-position: 100% 95%;
 }
 
 /*# sourceMappingURL=images.css.map */

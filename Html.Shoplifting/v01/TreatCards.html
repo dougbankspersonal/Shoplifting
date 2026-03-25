@@ -50,6 +50,13 @@
         "javascript/utils",
       ], function (debugLog, genericUtils, systemConfigs, treatCards, utils) {
         var sc = systemConfigs.getCardSystemConfigs();
+        // Swap card layout
+        var oldHeightPx = sc.cardHeightPx;
+        var oldWidthPx = sc.cardWidthPx;
+        sc.cardHeightPx = oldWidthPx;
+        sc.cardWidthPx = oldHeightPx;
+        debugLog.debugLog("main", "sc = ", JSON.stringify(sc));
+
         systemConfigs.setSystemConfigs(sc);
 
         // No system configs...
