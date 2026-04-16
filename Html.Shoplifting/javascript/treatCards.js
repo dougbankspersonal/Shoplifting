@@ -1,27 +1,12 @@
 define([
-  "dojo/dom",
-  "dojo/dom-style",
   "sharedJavascript/cards",
   "sharedJavascript/htmlUtils",
   "sharedJavascript/debugLog",
-  "sharedJavascript/genericMeasurements",
-  "javascript/gameData",
   "javascript/treatData",
   "javascript/types",
   "javascript/utils",
   "dojo/domReady!",
-], function (
-  dom,
-  domStyle,
-  cards,
-  htmlUtils,
-  debugLogModule,
-  genericMeasurements,
-  gameData,
-  treatData,
-  types,
-  utils,
-) {
+], function (cards, htmlUtils, debugLogModule, treatData, types, utils) {
   var debugLog = debugLogModule.debugLog;
 
   function addStealingNode(parent, config) {
@@ -44,41 +29,38 @@ define([
       types.iconTypes.steal,
     );
 
-    var stealingNode = htmlUtils.addDiv(parent, ["stealing"], "stealing");
-    htmlUtils.addDiv(stealingNode, ["noise"], "noise", noiseString);
-    htmlUtils.addDiv(stealingNode, ["steal"], "steal", stealString);
+    var finalString = noiseString + ":" + stealString;
+
+    var stealingNode = htmlUtils.addDiv(
+      parent,
+      ["stealing"],
+      "stealing",
+      finalString,
+    );
     return stealingNode;
   }
 
   function addPointsNode(parent, config) {
-    var pointsNode = htmlUtils.addDiv(parent, ["points"], "points");
-
     var rewardsConfig = config.reward;
     console.assert(rewardsConfig, "Expected config.reward to be defined");
 
     var consumeString =
-      types.iconStrings[types.iconTypes.consume] +
-      ": " +
-      rewardsConfig.consumePoints +
-      types.iconStrings[types.iconTypes.reward];
+      "<span class='consume'>" + rewardsConfig.consumePoints + "</span>";
     var saveString =
-      types.iconStrings[types.iconTypes.save] +
-      ": " +
-      rewardsConfig.savePoints +
-      types.iconStrings[types.iconTypes.reward];
+      "<span class='save'>" + rewardsConfig.savePoints + "</span>";
+    var finalString =
+      types.iconStrings[types.iconTypes.reward] +
+      ":" +
+      consumeString +
+      "/" +
+      saveString;
+    var pointsNode = htmlUtils.addDiv(
+      parent,
+      ["points"],
+      "points",
+      finalString,
+    );
 
-    var consumeNode = htmlUtils.addDiv(
-      pointsNode,
-      ["consume-points"],
-      "consume-points",
-      consumeString,
-    );
-    var saveNode = htmlUtils.addDiv(
-      pointsNode,
-      ["save-points"],
-      "save-points",
-      saveString,
-    );
     return pointsNode;
   }
 
@@ -103,6 +85,16 @@ define([
   }
 
   function addCardFrontAtIndex(parent, index) {
+    // Special case: last 3 cards are backs.
+    var numTreatCards = cards.getNumCardsFromConfigs(
+      treatData.treatCardConfigs,
+    );
+
+    if (index >= numTreatCards) {
+      index = index - numTreatCards;
+      return addCardBackAtIndex(parent, index);
+    }
+
     var config = cards.getCardConfigAtIndex(treatData.treatCardConfigs, index);
 
     var tierClass = "card-tier-" + config.tier;
@@ -114,48 +106,31 @@ define([
       "card-front-" + index,
     );
 
-    var flavorNode = htmlUtils.addDiv(
-      cardFrontNode,
-      ["flavor"],
-      "flavor-" + index,
-    );
+    // Info in corners.
+    addPointsNode(cardFrontNode, config);
+    addStealingNode(cardFrontNode, config);
 
-    var titleWrapperNode = htmlUtils.addDiv(
-      flavorNode,
-      ["title-wrapper"],
-      "title-wrapper",
+    // Middle: title and powers.
+    var middleNode = htmlUtils.addDiv(
+      cardFrontNode,
+      ["middle"],
+      "middle-" + index,
     );
 
     var titleNode = htmlUtils.addDiv(
-      titleWrapperNode,
+      middleNode,
       ["title"],
       "title",
       config.name,
     );
 
-    var imageNode = htmlUtils.addImage(
-      flavorNode,
-      ["treat-image", config.class],
-      "treat-image-" + index,
-    );
-
-    var pointsAndStealingWrapperNode = htmlUtils.addDiv(
-      cardFrontNode,
-      ["points-and-stealing-wrapper"],
-      "points-and-stealing-wrapper-" + index,
-    );
-
-    addPointsNode(pointsAndStealingWrapperNode, config);
-    addStealingNode(pointsAndStealingWrapperNode, config);
-
-    maybeAddPowerNode(cardFrontNode, config);
+    maybeAddPowerNode(middleNode, config);
 
     return cardFrontNode;
   }
 
   function addCardBackAtIndex(parent, index) {
-    var config = cards.getCardConfigAtIndex(treatData.treatCardConfigs, index);
-    var tier = config.tier;
+    var tier = index;
 
     var title;
     if (tier == 0) {
@@ -186,7 +161,7 @@ define([
     );
     debugLog("addCards", "numTreatCards = " + numTreatCards);
 
-    cards.addCards(numTreatCards, addCardFrontAtIndex, {
+    cards.addCards(numTreatCards + 3, addCardFrontAtIndex, {
       callback: addCardBackAtIndex,
     });
   }

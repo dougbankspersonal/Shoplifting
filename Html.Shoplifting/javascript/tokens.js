@@ -17,81 +17,165 @@ define([
   types,
 ) {
   var debugLog = debugLogModule.debugLog;
+  var tokensPerRow = 10;
+  var globalTokenCount = 0;
+  var allTokensNode;
+  var currentTokensRowNode;
+
+  var tokenConfigs = [
+    {
+      text: "A",
+      classes: ["boy", "family-0"],
+    },
+    {
+      text: "B",
+      classes: ["boy", "family-0"],
+    },
+    {
+      text: "C",
+      classes: ["boy", "family-0"],
+    },
+    {
+      text: "D",
+      classes: ["boy", "family-1"],
+    },
+    {
+      text: "E",
+      classes: ["boy", "family-1"],
+    },
+    {
+      text: "F",
+      classes: ["boy", "family-1"],
+    },
+    {
+      text: "G",
+      classes: ["boy", "family-2"],
+    },
+    {
+      text: "H",
+      classes: ["boy", "family-2"],
+    },
+    {
+      text: "I",
+      classes: ["boy", "family-2"],
+    },
+    {
+      text: "J",
+      classes: ["boy", "family-3"],
+    },
+    {
+      text: "K",
+      classes: ["boy", "family-3"],
+    },
+    {
+      text: "L",
+      classes: ["boy", "family-3"],
+    },
+    {
+      text: types.iconStrings[types.iconTypes.demerit],
+      classes: ["token", types.iconTypes.demerit, "square"],
+    },
+    {
+      text: types.iconStrings[types.iconTypes.noise],
+      classes: ["token", types.iconTypes.noise, "square", "family-0"],
+    },
+    {
+      text: types.iconStrings[types.iconTypes.noise],
+      classes: ["token", types.iconTypes.noise, "square", "family-1"],
+    },
+    {
+      text: types.iconStrings[types.iconTypes.noise],
+      classes: ["token", types.iconTypes.noise, "square", "family-2"],
+    },
+    {
+      text: types.iconStrings[types.iconTypes.noise],
+      classes: ["token", types.iconTypes.noise, "square", "family-3"],
+    },
+    {
+      text: types.iconStrings[types.iconTypes.steal],
+      classes: ["token", types.iconTypes.noise, "square", "family-0"],
+    },
+    {
+      text: types.iconStrings[types.iconTypes.steal],
+      classes: ["token", types.iconTypes.noise, "square", "family-1"],
+    },
+    {
+      text: types.iconStrings[types.iconTypes.steal],
+      classes: ["token", types.iconTypes.noise, "square", "family-2"],
+    },
+    {
+      text: types.iconStrings[types.iconTypes.steal],
+      classes: ["token", types.iconTypes.noise, "square", "family-3"],
+    },
+    {
+      text:
+        "<span class=plus-minus>+/-</span>" +
+        types.iconStrings[types.iconTypes.noise],
+      classes: ["token", types.iconTypes.noise, "one-shot"],
+    },
+    {
+      text:
+        "<span class=plus-minus>+/-</span>" +
+        types.iconStrings[types.iconTypes.steal],
+      classes: ["token", types.iconTypes.steal, "one-shot"],
+    },
+    {
+      text: types.iconStrings[types.iconTypes.reroll],
+      classes: ["token", types.iconTypes.reroll, "one-shot"],
+    },
+    {
+      text: types.iconStrings[types.iconTypes.teacher],
+      classes: ["token", types.iconTypes.teacher],
+    },
+  ];
 
   var tokenSizePx = genericMeasurements.standardCardWidthPx * 0.6;
 
-  function addToken(parent, color, borderColor, text, opt_classes) {
+  function addToken(parent, tokenConfig) {
     var classes = ["token"];
-    if (opt_classes) {
-      classes = classes.concat(opt_classes);
-    }
-    var tokenNode = htmlUtils.addDiv(parent, classes, "token", text);
+    classes = classes.concat(tokenConfig.classes);
 
+    var tokenNode = htmlUtils.addDiv(
+      parent,
+      classes,
+      "token",
+      tokenConfig.text,
+    );
     domStyle.set(tokenNode, {
-      "background-color": color,
-      "border-color": borderColor,
       width: tokenSizePx + "px",
       height: tokenSizePx + "px",
     });
+
     return tokenNode;
   }
 
-  function addTokenForSchoolboy(parent, playerIndex, boyIndex) {
-    var schoolboyIndex = playerIndex * gameData.boysPerPlayer + boyIndex;
-    var schoolboyName = types.schoolboyNames[schoolboyIndex];
-    var schoolboyFirstInitial = schoolboyName[0];
-
-    var tokenNode = addToken(
-      parent,
-      gameData.playerColorFamilies[playerIndex].medium,
-      gameData.playerColorFamilies[playerIndex].dark,
-      schoolboyFirstInitial,
-      ["schoolboy"],
-    );
-    return tokenNode;
-  }
-
-  function addDemeritToken(parent) {
-    return addToken(
-      parent,
-      "#aaaaaa",
-      "#555555",
-      types.iconStrings[types.iconTypes.demerit],
-      ["demerit"],
-    );
-  }
-
-  function addNoiseToken(parent) {
-    return addToken(
-      parent,
-      "#aaaa88",
-      "#555533",
-      types.iconStrings[types.iconTypes.noise],
-      ["noise"],
-    );
-  }
-
-  function addTokensForPlayer(parent, playerIndex) {
-    var rowOfTokensNode = htmlUtils.addDiv(parent, ["row-of-tokens"]);
-
-    for (var i = 0; i < gameData.boysPerPlayer; i++) {
-      addTokenForSchoolboy(rowOfTokensNode, playerIndex, i);
+  function maybeUpdateRow() {
+    globalTokenCount++;
+    if (globalTokenCount % tokensPerRow === 0) {
+      currentTokensRowNode = htmlUtils.addDiv(
+        allTokensNode,
+        ["row-of-tokens"],
+        "row-of-tokens",
+      );
     }
-    return rowOfTokensNode;
   }
 
   function addTokens() {
     var bodyNode = dom.byId("body");
 
-    var tokensNode = htmlUtils.addDiv(bodyNode, ["tokens"], "tokens");
+    allTokensNode = htmlUtils.addDiv(bodyNode, ["tokens"], "tokens");
 
-    for (var i = 0; i < gameData.numPlayers; i++) {
-      addTokensForPlayer(tokensNode, i);
+    currentTokensRowNode = htmlUtils.addDiv(
+      allTokensNode,
+      ["row-of-tokens"],
+      "row-of-tokens",
+    );
+
+    for (var i = 0; i < tokenConfigs.length; i++) {
+      var tokenConfig = tokenConfigs[i];
+      addToken(currentTokensRowNode, tokenConfig);
+      maybeUpdateRow();
     }
-
-    var rowOfTokensNode = htmlUtils.addDiv(tokensNode, ["row-of-tokens"]);
-    addDemeritToken(rowOfTokensNode);
-    addNoiseToken(rowOfTokensNode);
   }
 
   // This returned object becomes the defined value of this module

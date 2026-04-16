@@ -7,6 +7,7 @@ define([
   "sharedJavascript/debugLog",
   "javascript/gameData",
   "javascript/types",
+  "javascript/boardData",
   "javascript/utils",
   "dojo/domReady!",
 ], function (
@@ -18,6 +19,7 @@ define([
   debugLogModule,
   gameData,
   types,
+  boardData,
   utils,
 ) {
   var debugLog = debugLogModule.debugLog;
@@ -29,11 +31,11 @@ define([
       "modifier",
     );
 
-    var halfLength = Math.floor(gameData.modifierDieConfigs.length / 2);
+    var halfLength = Math.floor(boardData.modifierDieConfigs.length / 2);
 
     var containerNode = htmlUtils.addDiv(modifiersNode, ["modifier-container"]);
-    for (var i = 0; i < gameData.modifierDieConfigs.length; i++) {
-      var modifierDieConfig = gameData.modifierDieConfigs[i];
+    for (var i = 0; i < boardData.modifierDieConfigs.length; i++) {
+      var modifierDieConfig = boardData.modifierDieConfigs[i];
       utils.addDieConfigNode(
         containerNode,
         modifierDieConfig,
@@ -88,7 +90,7 @@ define([
       "die-configs",
     ]);
 
-    var dieConfigs = gameData.coreDieConfigsBySchoolboyIndex[schoolboyIndex];
+    var dieConfigs = boardData.coreDieConfigsBySchoolboyIndex[schoolboyIndex];
     debugLog(
       "addCoreDieConfigsNode",
       "dieConfigs  = ",
@@ -147,7 +149,7 @@ define([
       cardsAndDieInterpretationsNode,
       playerIndex,
       "Treats",
-      gameData.maxTreats,
+      boardData.maxTreats,
     );
     addAllDieInterpretationsNode(
       cardsAndDieInterpretationsNode,

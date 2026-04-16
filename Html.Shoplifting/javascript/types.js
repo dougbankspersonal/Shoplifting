@@ -24,12 +24,12 @@ define([], function () {
     core: powerTypeCore,
   };
 
-  var d1String = "⚀";
-  var d2String = "⚁";
-  var d3String = "⚂";
-  var d4String = "⚃";
-  var d5String = "⚄";
-  var d6String = "⚅";
+  var d1String = "<span class=die>⚀</span>";
+  var d2String = "<span class=die>⚁</span>";
+  var d3String = "<span class=die>⚂</span>";
+  var d4String = "<span class=die>⚃</span>";
+  var d5String = "<span class=die>⚄</span>";
+  var d6String = "<span class=die>⚅</span>  ";
 
   var dieStrings = [d1String, d2String, d3String, d4String, d5String, d6String];
 
@@ -41,6 +41,7 @@ define([], function () {
   var rewardIcon = "reward";
   var rerollIcon = "reroll";
   var demeritIcon = "demerit";
+  var teacherIcon = "teacher";
 
   var iconTypes = {
     move: moveIcon,
@@ -51,17 +52,19 @@ define([], function () {
     reward: rewardIcon,
     reroll: rerollIcon,
     demerit: demeritIcon,
+    teacher: teacherIcon,
   };
 
   var iconStrings = {
-    [iconTypes.move]: "👞",
+    [iconTypes.move]: "<span class=shoe>👞</span>",
     [iconTypes.steal]: "🤏",
     [iconTypes.noise]: "💥",
     [iconTypes.consume]: "🥄",
     [iconTypes.save]: "🕰️",
     [iconTypes.reward]: "😋",
-    [iconTypes.reroll]: "🎲♻️",
+    [iconTypes.reroll]: "♻️",
     [iconTypes.demerit]: "☠️",
+    [iconTypes.teacher]: "🍎",
   };
 
   // This returned object becomes the defined value of this module

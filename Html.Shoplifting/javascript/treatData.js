@@ -4,9 +4,9 @@ define([
   "javascript/types",
   "dojo/domReady!",
 ], function (dom, domStyle, types) {
-  var lowEndInstanceCount = 4;
-  var midRangeInstanceCount = 3;
-  var highEndInstanceCount = 2;
+  var lowEndInstanceCount = 5;
+  var midRangeInstanceCount = 5;
+  var highEndInstanceCount = 5;
 
   var treatCardConfigs = [
     // Low end treats.
@@ -43,7 +43,7 @@ define([
       },
       power: {
         type: types.powerTypes.oneShot,
-        noise: [-1, 1],
+        noise: 1,
       },
     },
     {
@@ -79,7 +79,7 @@ define([
       },
       power: {
         type: types.powerTypes.modifier,
-        move: [-4, -3, -2, 2, 3, 4],
+        move: [-2, -2, -1, 1, 2, 2],
       },
     },
     {
@@ -97,7 +97,7 @@ define([
       },
       power: {
         type: types.powerTypes.modifier,
-        noise: 2,
+        noise: [-1, -1, -1, 1, 1, 1],
       },
     },
     {
@@ -114,9 +114,8 @@ define([
         savePoints: 4,
       },
       power: {
-        type: types.powerTypes.core,
-        move: 3,
-        steal: 1,
+        type: types.powerTypes.modifier,
+        steal: [-1, -1, 1, 1, 1, 1],
       },
     },
 
@@ -154,7 +153,7 @@ define([
       },
       power: {
         type: types.powerTypes.oneShot,
-        noise: [-2, 2],
+        noise: 2,
       },
     },
     {
@@ -171,8 +170,8 @@ define([
         savePoints: 8,
       },
       power: {
-        type: types.powerTypes.modifier,
-        move: -4,
+        type: types.powerTypes.oneShot,
+        reroll: 2,
       },
     },
     {
@@ -190,7 +189,7 @@ define([
       },
       power: {
         type: types.powerTypes.modifier,
-        steal: 2,
+        steal: [-2, -2, 2, 2, 2, 2],
       },
     },
     {
@@ -207,9 +206,8 @@ define([
         savePoints: 8,
       },
       power: {
-        type: types.powerTypes.core,
-        move: 1,
-        noise: 3,
+        type: types.powerTypes.modifier,
+        move: [-4, -3, -3, 3, 3, 5],
       },
     },
     {
@@ -226,10 +224,8 @@ define([
         savePoints: 8,
       },
       power: {
-        type: types.powerTypes.core,
-        move: 2,
-        noise: 2,
-        steal: 2,
+        type: types.powerTypes.modifier,
+        noise: [-2, -2, 2, 2, 2, 2],
       },
     },
 

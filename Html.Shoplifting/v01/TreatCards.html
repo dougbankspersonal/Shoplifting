@@ -12,6 +12,10 @@
       href="https://fonts.googleapis.com/css2?family=Allura&family=Chewy&family=Luckiest+Guy&display=swap"
       rel="stylesheet"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
     <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
     <style type="text/css"></style>
   </head>
@@ -55,6 +59,7 @@
         var oldWidthPx = sc.cardWidthPx;
         sc.cardHeightPx = oldWidthPx;
         sc.cardWidthPx = oldHeightPx;
+        sc.cardsPerRow = 10;
         debugLog.debugLog("main", "sc = ", JSON.stringify(sc));
 
         systemConfigs.setSystemConfigs(sc);

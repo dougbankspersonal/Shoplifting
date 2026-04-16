@@ -1,3 +1,8 @@
+.shoe {
+  position: relative;
+  top: -0.3em;
+}
+
 .power {
   border: solid black 5px;
   border-radius: 10px;
@@ -30,4 +35,108 @@
       #dce9f5 100%
       /* slightly deeper powder blue at bottom */
     );
+}
+
+.color-family.steal {
+  border-color: #000066;
+  background: linear-gradient(to bottom,
+      #77aaee 0%,
+      /* a */
+      #88bbee 50%,
+      /* b (slightly darker) */
+      #99ccee 100%
+      /* back to a */
+    );
+}
+
+.color-family.reroll {
+  border-color: #663300;
+  background: linear-gradient(to bottom,
+      #eeaa77 0%,
+      /* a */
+      #eebb88 50%,
+      /* b (slightly darker) */
+      #eecc99 100%);
+}
+
+.color-family.noise {
+  border-color: #006600;
+  background: linear-gradient(to bottom,
+      #77eeaa 0%,
+      /* a */
+      #88eebb 50%,
+      /* b (slightly darker) */
+      #99eecc 100%
+      /* back to a */
+      /* back to a */
+    );
+}
+
+.color-family.demerit {
+  border-color: #333333;
+  background: linear-gradient(to bottom,
+      #222222 0%,
+      /* a */
+      #555555 50%,
+      /* b (slightly darker) */
+      #777777 100%
+      /* back to a */
+      /* back to a */
+    );
+}
+
+
+
+.color-family.noise.square {
+  border-color: #666600;
+  background: linear-gradient(to bottom,
+      #eeeeaa 0%,
+      /* a */
+      #eeeebb 50%,
+      /* b (slightly darker) */
+      #eeeecc 100%
+      /* back to a */
+      /* back to a */
+    );
+}
+
+.color-family.steal.square {
+  border-color: #666600;
+  background: linear-gradient(to bottom,
+      #ddaaff 0%,
+      /* a */
+      #ccbbff 50%,
+      /* b (slightly darker) */
+      #bbccff 100%
+      /* back to a */
+      /* back to a */
+    );
+}
+
+.family-0 {
+  border-color: #000044;
+  background: linear-gradient(to bottom,
+      #eeeeff 0%,
+      #ccccff 100%);
+}
+
+.family-1 {
+  border-color: #440000;
+  background: linear-gradient(to bottom,
+      #ffeeee 0%,
+      #ffcccc 100%);
+}
+
+.family-2 {
+  border-color: #004400;
+  background: linear-gradient(to bottom,
+      #eeffee 0%,
+      #ccffcc 100%);
+}
+
+.family-3 {
+  border-color: #444400;
+  background: linear-gradient(to bottom,
+      #ffffcc 0%,
+      #ffff99 100%);
 }

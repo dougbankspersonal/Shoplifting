@@ -4,29 +4,61 @@ body {
   .tokens {
     display: flex;
     flex-direction: column;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 
-    .tokens-for-player {
+    .row-of-tokens {
       display: flex;
       flex-direction: row;
     }
+
+    .token {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      border-style: solid;
+      border-width: 10px;
+      font-size: 80px;
+      font-weight: bold;
+      z-index: 1;
+      position: relative;
+
+      .plus-minus {
+        position: absolute;
+        bottom: 10px;
+        font-size: 40px;
+        z-index: 2;
+      }
+    }
+
+    .token.square {
+      border-radius: 0px;
+    }
+
+    .token.teacher {
+      border-color: #243483;
+      background: linear-gradient(to bottom, #eeeeff 0%, #ddddee 100%);
+    }
+
+    .token.demerit {
+      border-color: #333333;
+      background: linear-gradient(to bottom, #222222 0%, #555555 50%, #777777 100%);
+    }
+
+    .token.noise.one-shot {
+      border-color: #442200;
+      background: linear-gradient(to bottom, #ffee88 0%, #ffdd00 100%);
+    }
+
+    .token.steal.one-shot {
+      border-color: #002244;
+      background: linear-gradient(to bottom, #88eeff 0%, #00ddff 100%);
+    }
+
+    .token.reroll.one-shot {
+      border-color: #446600;
+      background: linear-gradient(to bottom, #ddffaa 0%, #cceeaa 100%);
+    }
+
   }
-}
-
-.token {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  border-style: solid;
-  border-width: 10px;
-  font-size: 50px;
-  font-weight: bold;
-}
-
-.token.demerit {
-  font-size: 65px;
-}
-
-.token.noise {
-  font-size: 65px;
 }

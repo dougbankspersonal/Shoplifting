@@ -1,3 +1,8 @@
+.shoe {
+  position: relative;
+  top: -0.3em;
+}
+
 .power {
   border: solid black 5px;
   border-radius: 10px;
@@ -15,6 +20,56 @@
 
 .power.one-shot {
   background: linear-gradient(to bottom, #e6f0fa 0%, #dce9f5 100%);
+}
+
+.color-family.steal {
+  border-color: #000066;
+  background: linear-gradient(to bottom, #77aaee 0%, #88bbee 50%, #99ccee 100%);
+}
+
+.color-family.reroll {
+  border-color: #663300;
+  background: linear-gradient(to bottom, #eeaa77 0%, #eebb88 50%, #eecc99 100%);
+}
+
+.color-family.noise {
+  border-color: #006600;
+  background: linear-gradient(to bottom, #77eeaa 0%, #88eebb 50%, #99eecc 100%);
+}
+
+.color-family.demerit {
+  border-color: #333333;
+  background: linear-gradient(to bottom, #222222 0%, #555555 50%, #777777 100%);
+}
+
+.color-family.noise.square {
+  border-color: #666600;
+  background: linear-gradient(to bottom, #eeeeaa 0%, #eeeebb 50%, #eeeecc 100%);
+}
+
+.color-family.steal.square {
+  border-color: #666600;
+  background: linear-gradient(to bottom, #ddaaff 0%, #ccbbff 50%, #bbccff 100%);
+}
+
+.family-0 {
+  border-color: #000044;
+  background: linear-gradient(to bottom, #eeeeff 0%, #ccccff 100%);
+}
+
+.family-1 {
+  border-color: #440000;
+  background: linear-gradient(to bottom, #ffeeee 0%, #ffcccc 100%);
+}
+
+.family-2 {
+  border-color: #004400;
+  background: linear-gradient(to bottom, #eeffee 0%, #ccffcc 100%);
+}
+
+.family-3 {
+  border-color: #444400;
+  background: linear-gradient(to bottom, #ffffcc 0%, #ffff99 100%);
 }
 
 /*# sourceMappingURL=common.css.map */

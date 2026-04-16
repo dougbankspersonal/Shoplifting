@@ -32,9 +32,9 @@ define([
     }
 
     var wrappedIconString =
-      "<span class=icon-" +
+      "<span class=" +
       iconType +
-      ">" +
+      ' icon">' +
       types.iconStrings[iconType] +
       "</span>";
 
@@ -58,7 +58,7 @@ define([
     return dieRoll;
   }
 
-  function addActionsNode(parent, powerConfig, opt_dieRoll) {
+  function getActionString(powerConfig, opt_dieRoll) {
     var evolvingString = "";
     var somethingPrior = false;
 
@@ -70,9 +70,6 @@ define([
       var index = opt_dieRoll - 1;
       var dieString = types.dieStrings[index];
       evolvingString = "<span class=die-roll>" + dieString + "</span>:";
-    } else {
-      // Power comes from consume.
-      evolvingString = types.iconStrings[types.iconTypes.consume] + ":";
     }
 
     [evolvingString, somethingPrior] = maybeAppendIcons(
@@ -101,12 +98,13 @@ define([
       types.iconTypes.reroll,
     );
 
-    return htmlUtils.addDiv(
-      parent,
-      ["actions"],
-      "actions-" + index,
-      evolvingString,
-    );
+    return evolvingString;
+  }
+
+  function addActionsNode(parent, powerConfig, opt_dieRoll) {
+    var string = getActionString(powerConfig, opt_dieRoll);
+
+    return htmlUtils.addDiv(parent, ["actions"], "actions", string);
   }
 
   // Add a node describing what happens with a particular die roll.
@@ -142,5 +140,6 @@ define([
     addDieConfigNode: addDieConfigNode,
     addActionsNode: addActionsNode,
     scaleTextInDivs: scaleTextInDivs,
+    getActionString: getActionString,
   };
 });
