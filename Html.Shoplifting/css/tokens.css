@@ -10,26 +10,41 @@ body .tokens .row-of-tokens {
   display: flex;
   flex-direction: row;
 }
+body .tokens .boy.token .token-text,
+body .tokens .steal.token .token-text {
+  font-size: 60px;
+}
+body .tokens .boy.token.back .token-text {
+  font-size: 150px;
+}
 body .tokens .token {
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
   border-style: solid;
   border-width: 10px;
-  font-size: 80px;
   font-weight: bold;
   z-index: 1;
   position: relative;
+  width: 256px;
+  height: 256px;
+  flex-direction: column;
 }
-body .tokens .token .plus-minus {
-  position: absolute;
-  bottom: 10px;
-  font-size: 40px;
-  z-index: 2;
+body .tokens .token .token-text {
+  font-size: 150px;
+}
+body .tokens .token .noise-die,
+body .tokens .token .steal {
+  width: 128px;
+  height: 128px;
+  border-radius: 15px;
+  border: rgb(0, 0, 0) solid 5px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 body .tokens .token.square {
-  border-radius: 0px;
+  border-radius: 16px;
 }
 body .tokens .token.teacher {
   border-color: #243483;
@@ -38,18 +53,6 @@ body .tokens .token.teacher {
 body .tokens .token.demerit {
   border-color: #333333;
   background: linear-gradient(to bottom, #222222 0%, #555555 50%, #777777 100%);
-}
-body .tokens .token.noise.one-shot {
-  border-color: #442200;
-  background: linear-gradient(to bottom, #ffee88 0%, #ffdd00 100%);
-}
-body .tokens .token.steal.one-shot {
-  border-color: #002244;
-  background: linear-gradient(to bottom, #88eeff 0%, #00ddff 100%);
-}
-body .tokens .token.reroll.one-shot {
-  border-color: #446600;
-  background: linear-gradient(to bottom, #ddffaa 0%, #cceeaa 100%);
 }
 
 /*# sourceMappingURL=tokens.css.map */

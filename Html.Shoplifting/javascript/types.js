@@ -1,17 +1,17 @@
 define([], function () {
   var schoolboyNames = [
     "Abner",
-    "Benedict",
+    "Ben",
     "Charles",
     "Dudley",
     "Eugene",
-    "Frederick",
+    "Fred",
     "George",
     "Henry",
     "Irving",
     "James",
-    "Kenneth",
-    "Lytton",
+    "Ken",
+    "Lyle",
   ];
 
   var powerTypeOneShot = "one-shot";

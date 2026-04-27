@@ -2,7 +2,7 @@ define(["javascript/types", "javascript/gameData", "dojo/domReady!"], function (
   types,
   gameData,
 ) {
-  var maxTreats = 3;
+  var pocketsPerBoy = 2;
 
   var gameVariant = "oneDieForAllSchoolboysCore";
 
@@ -207,6 +207,6 @@ define(["javascript/types", "javascript/gameData", "dojo/domReady!"], function (
   return {
     coreDieConfigsBySchoolboyIndex: coreDieConfigsBySchoolboyIndex,
     modifierDieConfigs: modifierDieConfigs,
-    maxTreats: maxTreats,
+    pocketsPerBoy: pocketsPerBoy,
   };
 });

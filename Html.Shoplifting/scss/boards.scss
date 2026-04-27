@@ -5,125 +5,217 @@ body {
     display: flex;
     flex-direction: column;
 
-    .boards-row {
+    .row-of-boards {
       display: flex;
       flex-direction: row;
     }
   }
 }
 
-.schoolboy-board {
+.title-board {
+  width: 495px;
+  height: 172px;
+  padding: 0px;
+  box-sizing: border-box;
   display: flex;
-  flex-direction: column;
-  border: 12px solid black;
-  border-radius: 24px;
+  align-items: center;
+  justify-content: start;
 
-  span.icon-move {
-    position: relative;
-    top: -14px;
-  }
-
-  .board-title {
-    font-size: 40px;
-    font-weight: bold;
-    text-align: center;
-    margin-top: 12px;
-  }
-
-  .cards-and-die-configs {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
-    gap: 12px;
-    padding: 12px;
-
-    .all-die-configs {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-
-      .die-configs {
-        font-size: 60px;
-        display: flex;
-        border: 4px solid black;
-        border-radius: 8px;
-        flex-direction: column;
-
-        .actions {
-          display: flex;
-        }
-      }
-
-      .power.die-configs.modifier {
-        .modifier-container {
-          display: flex;
-          flex-direction: row;
-        }
-      }
-    }
-  }
-
-  .cards {
+  .left-text {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    justify-content: center;
+    align-items: start;
+    padding-left: 30px;
 
-    .cards-title {
-      font-size: 30px;
+    .boy-name {
+      border: 3px solid black;
+      border-radius: 10px;
+      padding: 5px 10px;
       font-weight: bold;
-      margin-bottom: 12px;
-    }
-
-    .cards-slots {
+      font-size: 60px;
       display: flex;
-      flex-direction: column;
-      gap: 12px;
+      justify-content: center;
+      align-items: start;
+      text-shadow:
+        -1px -1px 0 white,
+        1px -1px 0 white,
+        -1px 1px 0 grey,
+        1px 1px 0 grey;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 
-      .card-slot {
-        border: 4px solid #000000;
-        border-radius: 8px;
-      }
+      background: linear-gradient(135deg,
+          #eeeeee 0%,
+          #ccccdd 20%,
+          #ffffff 35%,
+          #aaaaaa 50%,
+          #bbbbcc 65%,
+          #aaaabb 85%,
+          #f5f5f5 100%);
+
     }
+
+    .favorite {
+      margin-top: 10px;
+      font-size: 32px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      align-items: start;
+      border: 3px solid black;
+      border-radius: 10px;
+      padding: 5px 10px;
+      -webkit-text-stroke: 1px rgba(200, 200, 200, 0.7);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      background: linear-gradient(135deg,
+          #8f8500 0%,
+          #d4af37 25%,
+          #fff2a6 38%,
+          #d4af37 50%,
+          #b8962e 62%,
+          #fff2a6 75%,
+          #9a7c00 100%);
+      text-shadow:
+        -1px -1px 0 white,
+        1px -1px 0 white,
+        -1px 1px 0 grey,
+        1px 1px 0 grey;
+
+    }
+  }
+
+  .move-die {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 132px;
+    height: 132px;
+    border: 5px solid black;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+}
+
+.all-board {
+  border: 4px solid black;
+  background: linear-gradient(to bottom, #E1D9C2 0%, #E1D9C2 100%);
+  position: relative;
+}
+
+.standard-board {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-right: 12px;
+
+  .title-wrapper {
+    width: 55px;
+    position: relative;
+
+    .title {
+      font-size: 36px;
+      line-height: 45px;
+      height: 45px;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform-origin: top left;
+      transform: translateX(10px) rotate(-90deg) translateX(-50%);
+      white-space: nowrap;
+      text-shadow:
+        -1px -1px 0 white,
+        1px -1px 0 white,
+        -1px 1px 0 grey,
+        1px 1px 0 grey;
+
+    }
+  }
+
+  .inner-board {
+    border: 4px solid black;
+    border-radius: 10px;
+    width: 400px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 1.0);
   }
 }
 
-.schoolboy-board.player-0 {
-  .cards {
-    .cards-slots {
-      .card-slot {
-        background-color: #ccccff
-      }
-    }
+.standard-board.pocket {
+  .inner-board {
+    height: 270px;
+  }
+
+  .title-wrapper {
+    height: 270px;
   }
 }
 
-.schoolboy-board.player-1 {
-  .cards {
-    .cards-slots {
-      .card-slot {
-        background-color: #ffcccc
-      }
-    }
+.standard-board.tummy {
+  .inner-board {
+    height: 540px;
+  }
+
+  .title-wrapper {
+    height: 540px;
   }
 }
 
-.schoolboy-board.player-2 {
-  .cards {
-    .cards-slots {
-      .card-slot {
-        background-color: #ccffcc;
-      }
-    }
+.standard-board.tokens {
+  .inner-board {
+    height: 360px;
+  }
+
+  .title-wrapper {
+    height: 360px;
   }
 }
 
-.schoolboy-board.player-3 {
-  .cards {
-    .cards-slots {
-      .card-slot {
-        background-color: #ffffcc
-      }
+.standard-board.demerits {
+  .inner-board {
+    height: 360px;
+  }
+
+  .title-wrapper {
+    height: 360px;
+  }
+}
+
+.player-board {
+  padding: 20px;
+  border: 4px solid black;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+  gap: 20px;
+
+  .left-label {
+    display: flex;
+    flex-direction: column;
+    width: 80px;
+    position: relative;
+
+    .label {
+      font-size: 60px;
+      transform: rotate(-90deg);
+      position: absolute;
+      left: -50px;
+    }
+
+    .pockets-label.label {
+      top: 460px;
+    }
+
+    .tummy-label.label {
+      top: 1050px;
+    }
+
+    .tokens-label.label {
+      top: 1480px;
     }
   }
 }

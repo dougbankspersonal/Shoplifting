@@ -24,139 +24,91 @@ define([
 ) {
   var debugLog = debugLogModule.debugLog;
 
-  function addModifierConfigsNode(parent) {
-    var modifiersNode = htmlUtils.addDiv(
-      parent,
-      ["power", "modifier", "die-configs"],
-      "modifier",
-    );
+  var poofedCardWidth = genericMeasurements.standardCardWidthPx * 1.1;
+  var poofedCardHeight = genericMeasurements.standardCardHeightPx * 1.1;
+  var standardBoardWidth = poofedCardHeight + 24;
 
-    var halfLength = Math.floor(boardData.modifierDieConfigs.length / 2);
-
-    var containerNode = htmlUtils.addDiv(modifiersNode, ["modifier-container"]);
-    for (var i = 0; i < boardData.modifierDieConfigs.length; i++) {
-      var modifierDieConfig = boardData.modifierDieConfigs[i];
-      utils.addDieConfigNode(
-        containerNode,
-        modifierDieConfig,
-        types.powerTypes.modifier,
+  function addStandardBoards(parent, boardClass, boardTitle) {
+    for (var i = 0; i < gameData.numPlayers; i++) {
+      var classes = [boardClass, "all-board", "standard-board"];
+      var boardNode = htmlUtils.addDiv(
+        parent,
+        classes,
+        boardClass + "-board-" + i,
       );
-      if (i == halfLength - 1) {
-        containerNode = htmlUtils.addDiv(modifiersNode, ["modifier-container"]);
-      }
-    }
+      var titleWrapperNode = htmlUtils.addDiv(
+        boardNode,
+        ["title-wrapper"],
+        "title-wrapper-" + i,
+      );
 
-    return modifiersNode;
-  }
+      var titleNode = htmlUtils.addDiv(
+        titleWrapperNode,
+        ["title"],
+        "title-" + i,
+        boardTitle,
+      );
 
-  function addCardSlotNode(parent, playerIndex) {
-    debugLog("addCardSlotNode", "playerIndex = ", playerIndex);
-
-    var cardSlotNode = htmlUtils.addDiv(parent, ["card-slot"], "card-slot");
-
-    var poofedWidth = genericMeasurements.standardCardWidthPx * 1.1;
-    var poofedHeight = genericMeasurements.standardCardHeightPx * 1.1;
-
-    domStyle.set(cardSlotNode, {
-      width: poofedHeight + "px",
-      height: poofedWidth + "px",
-      "background-color": gameData.playerColorFamilies[playerIndex].medium,
-      "border-color": gameData.playerColorFamilies[playerIndex].dark,
-    });
-
-    return cardSlotNode;
-  }
-
-  function addCardSlotsNode(parent, playerIndex, title, count) {
-    // container for cards and title.
-    var cardsNode = htmlUtils.addDiv(parent, ["cards"]);
-
-    // title.
-    htmlUtils.addDiv(cardsNode, ["cards-title"], null, title);
-
-    // Container for cards.
-    var cardSlotsNode = htmlUtils.addDiv(cardsNode, ["cards-slots"]);
-    for (var i = 0; i < count; i++) {
-      addCardSlotNode(cardSlotsNode, playerIndex);
-    }
-  }
-
-  function addCoreDieConfigsNode(parent, schoolboyIndex) {
-    debugLog("addCoreDieConfigsNode", "schoolboyIndex  = ", schoolboyIndex);
-
-    var coreDieConfigsNode = htmlUtils.addDiv(parent, [
-      "power",
-      "core",
-      "die-configs",
-    ]);
-
-    var dieConfigs = boardData.coreDieConfigsBySchoolboyIndex[schoolboyIndex];
-    debugLog(
-      "addCoreDieConfigsNode",
-      "dieConfigs  = ",
-      JSON.stringify(dieConfigs),
-    );
-
-    for (var i = 0; i < dieConfigs.length; i++) {
-      var dieConfig = dieConfigs[i];
-      utils.addDieConfigNode(
-        coreDieConfigsNode,
-        dieConfig,
-        types.powerTypes.core,
+      var innerBoardNode = htmlUtils.addDiv(
+        boardNode,
+        ["inner-board", "family-" + i],
+        "inner-board-" + i,
       );
     }
-    return coreDieConfigsNode;
   }
 
-  function addAllDieInterpretationsNode(parent, schoolboyIndex) {
-    var allDieInterpretationsNode = htmlUtils.addDiv(parent, [
-      "all-die-configs",
-    ]);
-    addModifierConfigsNode(allDieInterpretationsNode);
-    addCoreDieConfigsNode(allDieInterpretationsNode, schoolboyIndex);
-    return allDieInterpretationsNode;
+  function addTitleBoards(parent, boyByPlayerIndex) {
+    for (var i = 0; i < gameData.numPlayers; i++) {
+      var boyIndex = i * gameData.boysPerPlayer + boyByPlayerIndex;
+      var boyName = types.schoolboyNames[boyIndex];
+      var classes = ["title-board", "all-board", "family-" + i];
+      var titleBoardNode = htmlUtils.addDiv(
+        parent,
+        classes,
+        "title-board-" + boyIndex,
+      );
+
+      var leftTextNode = htmlUtils.addDiv(
+        titleBoardNode,
+        ["left-text"],
+        "left-text-" + boyIndex,
+      );
+
+      var boyNameNode = htmlUtils.addDiv(
+        leftTextNode,
+        ["boy-name"],
+        "boy-name-" + boyIndex,
+        boyName,
+      );
+
+      var treats0Count = gameData.treat0CardConfigs.length;
+      var treat0Name = gameData.treat0CardConfigs[boyIndex % treats0Count].name;
+
+      htmlUtils.addDiv(
+        leftTextNode,
+        ["favorite"],
+        "favorite-" + boyIndex,
+        treat0Name,
+      );
+
+      htmlUtils.addImage(titleBoardNode, ["move-die"], "move-die");
+    }
   }
 
-  function addSchoolboyBoard(parent, playerIndex, schoolboyIndex) {
-    var boardIndex = playerIndex * gameData.boysPerPlayer + schoolboyIndex;
-    var playerClass = "player-" + playerIndex.toString();
-    var schoolboyClass = "schoolboy-" + schoolboyIndex.toString();
-    var boardId = "board-" + boardIndex.toString();
+  function addPocketBoards(parent) {
+    addStandardBoards(parent, "pocket", "Pocket");
+  }
 
-    var schoolboyBoardNode = htmlUtils.addDiv(
-      parent,
-      ["schoolboy-board", playerClass, schoolboyClass],
-      boardId,
-    );
+  function addTummyBoards(parent) {
+    addStandardBoards(parent, "tummy", "Tummy");
+  }
 
-    domStyle.set(schoolboyBoardNode, {
-      backgroundColor: gameData.playerColorFamilies[playerIndex].light,
-      "border-color": gameData.playerColorFamilies[playerIndex].dark,
-    });
+  function addTokensBoards(parent) {
+    addStandardBoards(parent, "tokens", "Tokens");
+  }
 
-    htmlUtils.addDiv(
-      schoolboyBoardNode,
-      ["board-title"],
-      null,
-      types.schoolboyNames[boardIndex],
-    );
-
-    var cardsAndDieInterpretationsNode = htmlUtils.addDiv(schoolboyBoardNode, [
-      "cards-and-die-configs",
-    ]);
-
-    addCardSlotsNode(
-      cardsAndDieInterpretationsNode,
-      playerIndex,
-      "Treats",
-      boardData.maxTreats,
-    );
-    addAllDieInterpretationsNode(
-      cardsAndDieInterpretationsNode,
-      schoolboyIndex,
-    );
-
-    return schoolboyBoardNode;
+  function addDemeritsBoards(parent) {
+    addStandardBoards(parent, "demerits", "Demerits");
   }
 
   function addBoards() {
@@ -164,12 +116,25 @@ define([
 
     var boardsNode = htmlUtils.addDiv(bodyNode, ["boards"], "boards");
 
-    for (var i = 0; i < gameData.numPlayers; i++) {
-      var boardsRowNode = htmlUtils.addDiv(boardsNode, ["boards-row"]);
-      for (var j = 0; j < gameData.boysPerPlayer; j++) {
-        addSchoolboyBoard(boardsRowNode, i, j);
-      }
+    var rowOfBoardsNode;
+
+    var wrapperNode = htmlUtils.addDiv(boardsNode, ["wrapper"], "wrapper");
+    for (var i = 0; i < gameData.boysPerPlayer; i++) {
+      rowOfBoardsNode = htmlUtils.addDiv(wrapperNode, ["row-of-boards"]);
+      addTitleBoards(rowOfBoardsNode, i);
     }
+
+    rowOfBoardsNode = htmlUtils.addDiv(boardsNode, ["row-of-boards"]);
+    addPocketBoards(rowOfBoardsNode);
+
+    rowOfBoardsNode = htmlUtils.addDiv(boardsNode, ["row-of-boards"]);
+    addTummyBoards(rowOfBoardsNode);
+
+    rowOfBoardsNode = htmlUtils.addDiv(boardsNode, ["row-of-boards"]);
+    addTokensBoards(rowOfBoardsNode);
+
+    rowOfBoardsNode = htmlUtils.addDiv(boardsNode, ["row-of-boards"]);
+    addDemeritsBoards(rowOfBoardsNode);
   }
 
   // This returned object becomes the defined value of this module

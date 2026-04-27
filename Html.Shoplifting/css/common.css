@@ -72,4 +72,24 @@
   background: linear-gradient(to bottom, #ffffcc 0%, #ffff99 100%);
 }
 
+.back.family-0 {
+  border-color: #000044;
+  background: linear-gradient(to bottom, #bbbbff 0%, #9999ff 100%);
+}
+
+.back.family-1 {
+  border-color: #440000;
+  background: linear-gradient(to bottom, #ffbbbb 0%, #ff9999 100%);
+}
+
+.back.family-2 {
+  border-color: #004400;
+  background: linear-gradient(to bottom, #bbffbb 0%, #99ff99 100%);
+}
+
+.back.family-3 {
+  border-color: #444400;
+  background: linear-gradient(to bottom, #ffff99 0%, #ffff66 100%);
+}
+
 /*# sourceMappingURL=common.css.map */

@@ -28,22 +28,27 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 15px solid black;
+  border: 5px solid black;
   position: relative;
 }
-.card.front .points {
+.card.front .card-stats {
   position: absolute;
   top: 10px;
-  left: 10px;
-  font-size: 24px;
+  font-size: 32px;
   font-weight: bold;
+  border: 2px solid black;
+  border-radius: 20px;
+  padding-left: 5px;
+  padding-right: 5px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+.card.front .points {
+  left: 10px;
+  background: #ccccdd;
 }
 .card.front .stealing {
-  position: absolute;
-  top: 10px;
   right: 10px;
-  font-size: 24px;
-  font-weight: bold;
+  background: #ccddcc;
 }
 .card.front span.die-roll {
   font-size: 1.8em;
@@ -65,42 +70,19 @@
   gap: 10px;
 }
 .card.front .middle .title {
+  padding-top: 20px;
   font-size: 30px;
   margin-top: 10px;
   font-weight: bold;
+  color: black;
+  text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 grey, 1px 1px 0 grey;
 }
-.card.front .middle .power {
-  margin-top: 10px;
-  width: 80%;
-  height: 60px;
-  border: solid black 3px;
-  border-radius: 5px;
-  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
-  font-family: "Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
-  font-size: 50px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.card.front .middle .power .actions {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-}
-.card.front .middle .power.one-shot .actions .icon {
-  border: 3px solid black;
-  border-radius: 50%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  font-size: 50px;
-  padding: 5px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+.card.front .middle .token {
+  height: 70px;
+  width: 70px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 4px solid black;
+  border-radius: 15px;
 }
 
 .card.back.card-tier-0,

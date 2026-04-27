@@ -26,106 +26,212 @@ define([
     {
       text: "A",
       classes: ["boy", "family-0"],
+      images: ["noise-die"],
     },
     {
       text: "B",
       classes: ["boy", "family-0"],
+      images: ["noise-die"],
     },
     {
       text: "C",
       classes: ["boy", "family-0"],
+      images: ["noise-die"],
     },
     {
       text: "D",
       classes: ["boy", "family-1"],
+      images: ["noise-die"],
     },
     {
       text: "E",
       classes: ["boy", "family-1"],
+      images: ["noise-die"],
     },
     {
       text: "F",
       classes: ["boy", "family-1"],
+      images: ["noise-die"],
     },
     {
       text: "G",
       classes: ["boy", "family-2"],
+      images: ["noise-die"],
     },
     {
       text: "H",
       classes: ["boy", "family-2"],
+      images: ["noise-die"],
     },
     {
       text: "I",
       classes: ["boy", "family-2"],
+      images: ["noise-die"],
     },
     {
       text: "J",
       classes: ["boy", "family-3"],
+      images: ["noise-die"],
     },
     {
       text: "K",
       classes: ["boy", "family-3"],
+      images: ["noise-die"],
     },
     {
       text: "L",
       classes: ["boy", "family-3"],
+      images: ["noise-die"],
+    },
+    {
+      text: "A",
+      classes: ["boy", "back", "family-0"],
+    },
+    {
+      text: "B",
+      classes: ["boy", "back", "family-0"],
+    },
+    {
+      text: "C",
+      classes: ["boy", "back", "family-0"],
+    },
+    {
+      text: "D",
+      classes: ["boy", "back", "family-1"],
+    },
+    {
+      text: "E",
+      classes: ["boy", "back", "family-1"],
+    },
+    {
+      text: "F",
+      classes: ["boy", "back", "family-1"],
+    },
+    {
+      text: "G",
+      classes: ["boy", "back", "family-2"],
+    },
+    {
+      text: "H",
+      classes: ["boy", "back", "family-2"],
+    },
+    {
+      text: "I",
+      classes: ["boy", "back", "family-2"],
+    },
+    {
+      text: "J",
+      classes: ["boy", "back", "family-3"],
+    },
+    {
+      text: "K",
+      classes: ["boy", "back", "family-3"],
+    },
+    {
+      text: "L",
+      classes: ["boy", "back", "family-3"],
     },
     {
       text: types.iconStrings[types.iconTypes.demerit],
-      classes: ["token", types.iconTypes.demerit, "square"],
+      classes: [types.iconTypes.demerit, "square"],
     },
     {
-      text: types.iconStrings[types.iconTypes.noise],
-      classes: ["token", types.iconTypes.noise, "square", "family-0"],
+      text: "A",
+      images: [types.iconTypes.steal],
+      classes: [types.iconTypes.steal, "square", "family-0"],
     },
     {
-      text: types.iconStrings[types.iconTypes.noise],
-      classes: ["token", types.iconTypes.noise, "square", "family-1"],
+      text: "B",
+      images: [types.iconTypes.steal],
+      classes: [types.iconTypes.steal, "square", "family-0"],
     },
     {
-      text: types.iconStrings[types.iconTypes.noise],
-      classes: ["token", types.iconTypes.noise, "square", "family-2"],
+      text: "C",
+      images: [types.iconTypes.steal],
+      classes: [types.iconTypes.steal, "square", "family-0"],
     },
     {
-      text: types.iconStrings[types.iconTypes.noise],
-      classes: ["token", types.iconTypes.noise, "square", "family-3"],
+      text: "D",
+      images: [types.iconTypes.steal],
+      classes: [types.iconTypes.steal, "square", "family-1"],
     },
     {
-      text: types.iconStrings[types.iconTypes.steal],
-      classes: ["token", types.iconTypes.noise, "square", "family-0"],
+      text: "E",
+      images: [types.iconTypes.steal],
+      classes: [types.iconTypes.steal, "square", "family-1"],
     },
     {
-      text: types.iconStrings[types.iconTypes.steal],
-      classes: ["token", types.iconTypes.noise, "square", "family-1"],
+      text: "F",
+      images: [types.iconTypes.steal],
+      classes: [types.iconTypes.steal, "square", "family-1"],
     },
     {
-      text: types.iconStrings[types.iconTypes.steal],
-      classes: ["token", types.iconTypes.noise, "square", "family-2"],
+      text: "G",
+      images: [types.iconTypes.steal],
+      classes: [types.iconTypes.steal, "square", "family-2"],
     },
     {
-      text: types.iconStrings[types.iconTypes.steal],
-      classes: ["token", types.iconTypes.noise, "square", "family-3"],
+      text: "H",
+      images: [types.iconTypes.steal],
+      classes: [types.iconTypes.steal, "square", "family-2"],
     },
+    {
+      text: "I",
+      images: [types.iconTypes.steal],
+      classes: [types.iconTypes.steal, "square", "family-2"],
+    },
+    {
+      text: "J",
+      images: [types.iconTypes.steal],
+      classes: [types.iconTypes.steal, "square", "family-3"],
+    },
+    {
+      text: "K",
+      images: [types.iconTypes.steal],
+      classes: [types.iconTypes.steal, "square", "family-3"],
+    },
+    {
+      text: "L",
+      images: [types.iconTypes.steal],
+      classes: [types.iconTypes.steal, "square", "family-3"],
+    },
+    /*
     {
       text:
         "<span class=plus-minus>+/-</span>" +
         types.iconStrings[types.iconTypes.noise],
-      classes: ["token", types.iconTypes.noise, "one-shot"],
+      classes: [types.iconTypes.noise, "one-shot"],
     },
     {
       text:
         "<span class=plus-minus>+/-</span>" +
-        types.iconStrings[types.iconTypes.steal],
-      classes: ["token", types.iconTypes.steal, "one-shot"],
+        types.iconStrings[types.iconTypes.move],
+      classes: [types.iconTypes.move, "one-shot"],
+    },
+    */
+    {
+      images: [gameData.oneShotTypes.MoveFlipDie],
+      classes: ["one-shot", "square"],
     },
     {
-      text: types.iconStrings[types.iconTypes.reroll],
-      classes: ["token", types.iconTypes.reroll, "one-shot"],
+      images: [gameData.oneShotTypes.NoiseFlipDie],
+      classes: ["one-shot", "square"],
     },
     {
-      text: types.iconStrings[types.iconTypes.teacher],
-      classes: ["token", types.iconTypes.teacher],
+      images: [gameData.oneShotTypes.SecretPassage],
+      classes: ["one-shot", "square"],
+    },
+    {
+      images: [gameData.oneShotTypes.NoSteal],
+      classes: ["one-shot", "square"],
+    },
+    {
+      images: [gameData.oneShotTypes.Persuasion],
+      classes: ["one-shot", "square"],
+    },
+    {
+      images: ["professor"],
+      classes: [],
     },
   ];
 
@@ -135,16 +241,25 @@ define([
     var classes = ["token"];
     classes = classes.concat(tokenConfig.classes);
 
-    var tokenNode = htmlUtils.addDiv(
-      parent,
-      classes,
-      "token",
-      tokenConfig.text,
-    );
-    domStyle.set(tokenNode, {
-      width: tokenSizePx + "px",
-      height: tokenSizePx + "px",
-    });
+    var tokenNode = htmlUtils.addDiv(parent, classes, "token");
+
+    if (tokenConfig.text) {
+      htmlUtils.addDiv(
+        tokenNode,
+        ["token-text"],
+        "token-text",
+        tokenConfig.text,
+      );
+      if (tokenConfig.die) {
+        htmlUtils.addDiv(tokenNode, ["die-indicator"], "die-indicator");
+      }
+    }
+    if (tokenConfig.images) {
+      for (var i = 0; i < tokenConfig.images.length; i++) {
+        var imageName = tokenConfig.images[i];
+        htmlUtils.addImage(tokenNode, [imageName], "token-image");
+      }
+    }
 
     return tokenNode;
   }

@@ -2,19 +2,68 @@ define([
   "sharedJavascript/cards",
   "sharedJavascript/htmlUtils",
   "sharedJavascript/debugLog",
-  "javascript/treatData",
+  "javascript/gameData",
   "javascript/types",
   "javascript/utils",
   "dojo/domReady!",
-], function (cards, htmlUtils, debugLogModule, treatData, types, utils) {
+], function (cards, htmlUtils, debugLogModule, gameData, types, utils) {
   var debugLog = debugLogModule.debugLog;
+
+  var _treatCardConfigs = null;
+  function getTreatCardConfigs() {
+    if (_treatCardConfigs) {
+      return _treatCardConfigs;
+    }
+
+    var rawTreat0CardConfigs = gameData.treat0CardConfigs;
+    var rawTreat1CardConfigs = gameData.treat1CardConfigs;
+
+    // Fill in some basic data true for all low end configs.
+    var updatedTreat0CardConfigs = [];
+    for (var i = 0; i < rawTreat0CardConfigs.length; i++) {
+      var config = structuredClone(rawTreat0CardConfigs[i]);
+      config.tier = 0;
+      config.stealing = {
+        steal: 1,
+        noise: 0,
+      };
+      config.reward = {
+        pocketPoints: gameData.treat0PocketPoints,
+        tummyPoints: gameData.treat0TummyPoints,
+      };
+      config.count = gameData.treat0InstanceCount;
+
+      updatedTreat0CardConfigs.push(config);
+    }
+
+    // Basic data true for all high end configs.
+    var updatedTreat1CardConfigs = [];
+    for (var i = 0; i < rawTreat1CardConfigs.length; i++) {
+      var config = structuredClone(rawTreat1CardConfigs[i]);
+      config.tier = 1;
+      config.count = gameData.treat1InstanceCount;
+
+      updatedTreat1CardConfigs.push(config);
+    }
+
+    // Concat them together.
+    _treatCardConfigs = updatedTreat0CardConfigs.concat(
+      updatedTreat1CardConfigs,
+    );
+    debugLog(
+      "getTreatCardConfigs",
+      "_treatCardConfigs = " + JSON.stringify(_treatCardConfigs),
+    );
+
+    return _treatCardConfigs;
+  }
 
   function addStealingNode(parent, config) {
     var stealingConfig = config.stealing;
     console.assert(stealingConfig, "Expected config.stealing to be defined");
 
     var noiseString = "";
-    [noiseString, _] = utils.maybeAppendIcons(
+    [noiseString, addedNoise] = utils.maybeAppendIcons(
       noiseString,
       false,
       stealingConfig,
@@ -29,11 +78,16 @@ define([
       types.iconTypes.steal,
     );
 
-    var finalString = noiseString + ":" + stealString;
+    var finalString;
+    if (addedNoise) {
+      finalString = noiseString + ":" + stealString;
+    } else {
+      finalString = stealString;
+    }
 
     var stealingNode = htmlUtils.addDiv(
       parent,
-      ["stealing"],
+      ["stealing", "card-stats"],
       "stealing",
       finalString,
     );
@@ -45,9 +99,9 @@ define([
     console.assert(rewardsConfig, "Expected config.reward to be defined");
 
     var consumeString =
-      "<span class='consume'>" + rewardsConfig.consumePoints + "</span>";
+      "<span class='consume'>" + rewardsConfig.tummyPoints + "</span>";
     var saveString =
-      "<span class='save'>" + rewardsConfig.savePoints + "</span>";
+      "<span class='save'>" + rewardsConfig.pocketPoints + "</span>";
     var finalString =
       types.iconStrings[types.iconTypes.reward] +
       ":" +
@@ -56,7 +110,7 @@ define([
       saveString;
     var pointsNode = htmlUtils.addDiv(
       parent,
-      ["points"],
+      ["points", "card-stats"],
       "points",
       finalString,
     );
@@ -64,38 +118,41 @@ define([
     return pointsNode;
   }
 
-  function maybeAddPowerNode(parent, config) {
-    if (!config.power) {
+  function maybeAddOneShotNode(parent, config, index) {
+    if (config.tier != 0) {
       return null;
     }
+    var oneShotType =
+      gameData.oneShotTypesArray[index % gameData.oneShotTypesArray.length];
 
-    var powerType = config.power.type;
-    var powerNode = htmlUtils.addDiv(parent, ["power", powerType], "power");
-
-    // Depends on power type.
-    if (
-      powerType == types.powerTypes.modifier ||
-      powerType == types.powerTypes.core
-    ) {
-      // There is a die involved.
-      utils.addDieConfigNode(powerNode, config.power);
-    } else {
-      utils.addActionsNode(powerNode, config.power);
-    }
+    var oneShotNode = htmlUtils.addImage(
+      parent,
+      ["one-shot", oneShotType, "token"],
+      "one-shot-" + index,
+    );
+    return oneShotNode;
   }
 
   function addCardFrontAtIndex(parent, index) {
-    // Special case: last 3 cards are backs.
-    var numTreatCards = cards.getNumCardsFromConfigs(
-      treatData.treatCardConfigs,
+    debugLog("addCardFrontAtIndex", "index = ", index);
+
+    var treatCardConfigs = getTreatCardConfigs();
+    debugLog(
+      "addCardFrontAtIndex",
+      "treatCardConfigs = ",
+      JSON.stringify(treatCardConfigs),
     );
+
+    // Special case: last 3 cards are backs.
+    var numTreatCards = cards.getNumCardsFromConfigs(treatCardConfigs);
 
     if (index >= numTreatCards) {
       index = index - numTreatCards;
       return addCardBackAtIndex(parent, index);
     }
 
-    var config = cards.getCardConfigAtIndex(treatData.treatCardConfigs, index);
+    var config = cards.getCardConfigAtIndex(treatCardConfigs, index);
+    debugLog("addCardFrontAtIndex", "config = ", JSON.stringify(config));
 
     var tierClass = "card-tier-" + config.tier;
     var powerTypeClass = config.power ? config.power.type : "no-power";
@@ -124,7 +181,7 @@ define([
       config.name,
     );
 
-    maybeAddPowerNode(middleNode, config);
+    maybeAddOneShotNode(middleNode, config, index);
 
     return cardFrontNode;
   }
@@ -150,15 +207,14 @@ define([
   }
 
   function addCards() {
+    var treatCardConfigs = getTreatCardConfigs();
+
     debugLog(
       "addCards",
-      "treatData.treatCardConfigs = " +
-        JSON.stringify(treatData.treatCardConfigs),
+      "treatCardConfigs = " + JSON.stringify(treatCardConfigs),
     );
 
-    var numTreatCards = cards.getNumCardsFromConfigs(
-      treatData.treatCardConfigs,
-    );
+    var numTreatCards = cards.getNumCardsFromConfigs(treatCardConfigs);
     debugLog("addCards", "numTreatCards = " + numTreatCards);
 
     cards.addCards(numTreatCards + 3, addCardFrontAtIndex, {
