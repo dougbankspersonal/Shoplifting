@@ -21,6 +21,9 @@ body {
     .boy.token.back {
       .token-text {
         font-size: 150px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
     }
 
@@ -38,6 +41,7 @@ body {
       width: 256px;
       height: 256px;
       flex-direction: column;
+      box-sizing: border-box;
 
       .token-text {
         font-size: 150px;

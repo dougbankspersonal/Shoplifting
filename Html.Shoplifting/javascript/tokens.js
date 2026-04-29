@@ -22,219 +22,6 @@ define([
   var allTokensNode;
   var currentTokensRowNode;
 
-  var tokenConfigs = [
-    {
-      text: "A",
-      classes: ["boy", "family-0"],
-      images: ["noise-die"],
-    },
-    {
-      text: "B",
-      classes: ["boy", "family-0"],
-      images: ["noise-die"],
-    },
-    {
-      text: "C",
-      classes: ["boy", "family-0"],
-      images: ["noise-die"],
-    },
-    {
-      text: "D",
-      classes: ["boy", "family-1"],
-      images: ["noise-die"],
-    },
-    {
-      text: "E",
-      classes: ["boy", "family-1"],
-      images: ["noise-die"],
-    },
-    {
-      text: "F",
-      classes: ["boy", "family-1"],
-      images: ["noise-die"],
-    },
-    {
-      text: "G",
-      classes: ["boy", "family-2"],
-      images: ["noise-die"],
-    },
-    {
-      text: "H",
-      classes: ["boy", "family-2"],
-      images: ["noise-die"],
-    },
-    {
-      text: "I",
-      classes: ["boy", "family-2"],
-      images: ["noise-die"],
-    },
-    {
-      text: "J",
-      classes: ["boy", "family-3"],
-      images: ["noise-die"],
-    },
-    {
-      text: "K",
-      classes: ["boy", "family-3"],
-      images: ["noise-die"],
-    },
-    {
-      text: "L",
-      classes: ["boy", "family-3"],
-      images: ["noise-die"],
-    },
-    {
-      text: "A",
-      classes: ["boy", "back", "family-0"],
-    },
-    {
-      text: "B",
-      classes: ["boy", "back", "family-0"],
-    },
-    {
-      text: "C",
-      classes: ["boy", "back", "family-0"],
-    },
-    {
-      text: "D",
-      classes: ["boy", "back", "family-1"],
-    },
-    {
-      text: "E",
-      classes: ["boy", "back", "family-1"],
-    },
-    {
-      text: "F",
-      classes: ["boy", "back", "family-1"],
-    },
-    {
-      text: "G",
-      classes: ["boy", "back", "family-2"],
-    },
-    {
-      text: "H",
-      classes: ["boy", "back", "family-2"],
-    },
-    {
-      text: "I",
-      classes: ["boy", "back", "family-2"],
-    },
-    {
-      text: "J",
-      classes: ["boy", "back", "family-3"],
-    },
-    {
-      text: "K",
-      classes: ["boy", "back", "family-3"],
-    },
-    {
-      text: "L",
-      classes: ["boy", "back", "family-3"],
-    },
-    {
-      text: types.iconStrings[types.iconTypes.demerit],
-      classes: [types.iconTypes.demerit, "square"],
-    },
-    {
-      text: "A",
-      images: [types.iconTypes.steal],
-      classes: [types.iconTypes.steal, "square", "family-0"],
-    },
-    {
-      text: "B",
-      images: [types.iconTypes.steal],
-      classes: [types.iconTypes.steal, "square", "family-0"],
-    },
-    {
-      text: "C",
-      images: [types.iconTypes.steal],
-      classes: [types.iconTypes.steal, "square", "family-0"],
-    },
-    {
-      text: "D",
-      images: [types.iconTypes.steal],
-      classes: [types.iconTypes.steal, "square", "family-1"],
-    },
-    {
-      text: "E",
-      images: [types.iconTypes.steal],
-      classes: [types.iconTypes.steal, "square", "family-1"],
-    },
-    {
-      text: "F",
-      images: [types.iconTypes.steal],
-      classes: [types.iconTypes.steal, "square", "family-1"],
-    },
-    {
-      text: "G",
-      images: [types.iconTypes.steal],
-      classes: [types.iconTypes.steal, "square", "family-2"],
-    },
-    {
-      text: "H",
-      images: [types.iconTypes.steal],
-      classes: [types.iconTypes.steal, "square", "family-2"],
-    },
-    {
-      text: "I",
-      images: [types.iconTypes.steal],
-      classes: [types.iconTypes.steal, "square", "family-2"],
-    },
-    {
-      text: "J",
-      images: [types.iconTypes.steal],
-      classes: [types.iconTypes.steal, "square", "family-3"],
-    },
-    {
-      text: "K",
-      images: [types.iconTypes.steal],
-      classes: [types.iconTypes.steal, "square", "family-3"],
-    },
-    {
-      text: "L",
-      images: [types.iconTypes.steal],
-      classes: [types.iconTypes.steal, "square", "family-3"],
-    },
-    /*
-    {
-      text:
-        "<span class=plus-minus>+/-</span>" +
-        types.iconStrings[types.iconTypes.noise],
-      classes: [types.iconTypes.noise, "one-shot"],
-    },
-    {
-      text:
-        "<span class=plus-minus>+/-</span>" +
-        types.iconStrings[types.iconTypes.move],
-      classes: [types.iconTypes.move, "one-shot"],
-    },
-    */
-    {
-      images: [gameData.oneShotTypes.MoveFlipDie],
-      classes: ["one-shot", "square"],
-    },
-    {
-      images: [gameData.oneShotTypes.NoiseFlipDie],
-      classes: ["one-shot", "square"],
-    },
-    {
-      images: [gameData.oneShotTypes.SecretPassage],
-      classes: ["one-shot", "square"],
-    },
-    {
-      images: [gameData.oneShotTypes.NoSteal],
-      classes: ["one-shot", "square"],
-    },
-    {
-      images: [gameData.oneShotTypes.Persuasion],
-      classes: ["one-shot", "square"],
-    },
-    {
-      images: ["professor"],
-      classes: [],
-    },
-  ];
-
   var tokenSizePx = genericMeasurements.standardCardWidthPx * 0.6;
 
   function addToken(parent, tokenConfig) {
@@ -243,16 +30,32 @@ define([
 
     var tokenNode = htmlUtils.addDiv(parent, classes, "token");
 
+    if (tokenConfig.tokenColorFamily) {
+      domStyle.set(tokenNode, {
+        border: "12px solid " + tokenConfig.tokenColorFamily.dark,
+        color: tokenConfig.tokenColorFamily.dark,
+      });
+    }
+
     if (tokenConfig.text) {
-      htmlUtils.addDiv(
+      var textNode = htmlUtils.addDiv(
         tokenNode,
         ["token-text"],
         "token-text",
         tokenConfig.text,
       );
-      if (tokenConfig.die) {
-        htmlUtils.addDiv(tokenNode, ["die-indicator"], "die-indicator");
+
+      if (tokenConfig.textBackgroundColor) {
+        domStyle.set(textNode, {
+          "background-color": tokenConfig.textBackgroundColor,
+          "border-radius": "50%",
+          border: "4px solid black",
+          "aspect-ratio": "1 / 1",
+        });
       }
+    }
+    if (tokenConfig.die) {
+      htmlUtils.addDiv(tokenNode, ["die-indicator"], "die-indicator");
     }
     if (tokenConfig.images) {
       for (var i = 0; i < tokenConfig.images.length; i++) {
@@ -275,6 +78,96 @@ define([
     }
   }
 
+  function generateOneShotTokenConfigs() {
+    var oneShotTokenConfigs = [];
+
+    for (var i = 0; i < types.oneShotTypesArray.length; i++) {
+      var oneShotType = types.oneShotTypesArray[i];
+      var tokenConfig = {
+        images: [oneShotType],
+        classes: ["one-shot", "square"],
+      };
+      oneShotTokenConfigs.push(tokenConfig);
+    }
+
+    return oneShotTokenConfigs;
+  }
+
+  function generatePerBoyTokenConfigs() {
+    var boyStealTokenConfigs = [];
+    var boySideTwoTokenConfigs = [];
+    var boySideOneTokenConfigs = [];
+
+    for (var i = 0; i < types.schoolboyConfigs.length; i++) {
+      var schoolboyConfig = types.schoolboyConfigs[i];
+      var boyFavorite = schoolboyConfig.favorite;
+      var boyName = schoolboyConfig.name;
+      var boyFirstInitial = boyName[0].toUpperCase();
+
+      debugLog(
+        "generatePerBoyTokenConfigs",
+        "schoolboyConfig = ",
+        JSON.stringify(schoolboyConfig),
+      );
+
+      var schoolboyConfigFamily = schoolboyConfig.family;
+      debugLog(
+        "generatePerBoyTokenConfigs",
+        "schoolboyConfigFamily = " + schoolboyConfigFamily,
+      );
+
+      debugLog(
+        "generatePerBoyTokenConfigs",
+        "gameData.playerColorFamilies = " +
+          JSON.stringify(gameData.playerColorFamilies),
+      );
+
+      var tokenColorFamily =
+        gameData.playerColorFamilies[schoolboyConfig.family];
+
+      var stealConfig = {
+        text: boyFirstInitial,
+        tokenColorFamily: tokenColorFamily,
+        images: [types.iconTypes.steal],
+        classes: [
+          types.iconTypes.steal,
+          "square",
+          "family-" + schoolboyConfig.family,
+        ],
+      };
+      boyStealTokenConfigs.push(stealConfig);
+
+      var boySideOneTokenConfig = {
+        text: boyFirstInitial,
+        images: ["noise-die"],
+        classes: ["boy", "family-" + schoolboyConfig.family],
+        tokenColorFamily: tokenColorFamily,
+      };
+
+      boySideOneTokenConfigs.push(boySideOneTokenConfig);
+
+      var boySideTwoTokenConfig = {
+        text: boyFirstInitial,
+        textBackgroundColor: boyFavorite.color,
+        classes: ["boy", "back", "family-" + schoolboyConfig.family],
+        tokenColorFamily: tokenColorFamily,
+      };
+      boySideTwoTokenConfigs.push(boySideTwoTokenConfig);
+    }
+    return boyStealTokenConfigs.concat(
+      boySideOneTokenConfigs,
+      boySideTwoTokenConfigs,
+    );
+  }
+
+  function getAugmentedTokenConfigs() {
+    var rawTokenConfigs = types.rawTokenConfigs;
+    // Roll extra configs on the fly for boys and teams.
+    var perBoyTokenConfigs = generatePerBoyTokenConfigs();
+    var oneShotTokenConfigs = generateOneShotTokenConfigs();
+    return rawTokenConfigs.concat(perBoyTokenConfigs, oneShotTokenConfigs);
+  }
+
   function addTokens() {
     var bodyNode = dom.byId("body");
 
@@ -286,6 +179,7 @@ define([
       "row-of-tokens",
     );
 
+    var tokenConfigs = getAugmentedTokenConfigs();
     for (var i = 0; i < tokenConfigs.length; i++) {
       var tokenConfig = tokenConfigs[i];
       addToken(currentTokensRowNode, tokenConfig);

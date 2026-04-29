@@ -7,7 +7,6 @@ define([
   "sharedJavascript/debugLog",
   "javascript/gameData",
   "javascript/types",
-  "javascript/boardData",
   "javascript/utils",
   "dojo/domReady!",
 ], function (
@@ -19,7 +18,6 @@ define([
   debugLogModule,
   gameData,
   types,
-  boardData,
   utils,
 ) {
   var debugLog = debugLogModule.debugLog;
@@ -60,7 +58,7 @@ define([
   function addTitleBoards(parent, boyByPlayerIndex) {
     for (var i = 0; i < gameData.numPlayers; i++) {
       var boyIndex = i * gameData.boysPerPlayer + boyByPlayerIndex;
-      var boyName = types.schoolboyNames[boyIndex];
+      var boyName = types.schoolboyConfigs[boyIndex].name;
       var classes = ["title-board", "all-board", "family-" + i];
       var titleBoardNode = htmlUtils.addDiv(
         parent,
@@ -81,15 +79,19 @@ define([
         boyName,
       );
 
-      var treats0Count = gameData.treat0CardConfigs.length;
-      var treat0Name = gameData.treat0CardConfigs[boyIndex % treats0Count].name;
+      var treats0Count = types.treat0CardConfigs.length;
+      var treat0Name = types.treat0CardConfigs[boyIndex % treats0Count].name;
+      var treat0Color = types.treat0CardConfigs[boyIndex % treats0Count].color;
 
-      htmlUtils.addDiv(
+      var favoriteNode = htmlUtils.addDiv(
         leftTextNode,
         ["favorite"],
         "favorite-" + boyIndex,
         treat0Name,
       );
+      domStyle.set(favoriteNode, {
+        "background-color": treat0Color,
+      });
 
       htmlUtils.addImage(titleBoardNode, ["move-die"], "move-die");
     }

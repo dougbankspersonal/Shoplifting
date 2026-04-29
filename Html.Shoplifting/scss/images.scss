@@ -1,3 +1,33 @@
+div.pseudo-image.pips-0 {
+  background-image: url("../images/pips-0.png");
+}
+
+
+
+div.pseudo-image.pips-1 {
+  background-image: url("../images/pips-1.png");
+}
+
+div.pseudo-image.pips-2 {
+  background-image: url("../images/pips-2.png");
+}
+
+div.pseudo-image.pips-3 {
+  background-image: url("../images/pips-3.png");
+}
+
+div.pseudo-image.pips-4 {
+  background-image: url("../images/pips-4.png");
+}
+
+div.pseudo-image.pips-5 {
+  background-image: url("../images/pips-5.png");
+}
+
+div.pseudo-image.pips-6 {
+  background-image: url("../images/pips-6.png");
+}
+
 div.pseudo-image.move-flip-die {
   background-image: url("../images/move-flip-die.png");
 }
@@ -10,8 +40,47 @@ div.pseudo-image.secret-passage {
   background-image: url("../images/secret-passage.png");
 }
 
+/*
+    FlipDie: oneShotTypeFlipDie,
+    ExtraSteal: oneShotTypeExtraSteal,
+    Persuasion: oneShotTypePersuasion,
+    Reroll: oneShotTypeReroll,
+    CherryBomb: oneShotTypeCherryBomb,
+    Counterclockwise: oneShotTypeCounterclockwise,
+    Hide: oneShotTypeHide,
+    Shush: oneShotTypeShush,
+*/
+
+div.pseudo-image.flip-die {
+  background-image: url("../images/flip-die.png");
+}
+
+div.pseudo-image.extra-steal {
+  background-image: url("../images/extra-steal.png");
+}
+
 div.pseudo-image.persuasion {
   background-image: url("../images/persuasion.png");
+}
+
+div.pseudo-image.reroll {
+  background-image: url("../images/reroll.png");
+}
+
+div.pseudo-image.cherry-bomb {
+  background-image: url("../images/cherry-bomb.png");
+}
+
+div.pseudo-image.counterclockwise {
+  background-image: url("../images/counterclockwise.png");
+}
+
+div.pseudo-image.hide {
+  background-image: url("../images/hide.png");
+}
+
+div.pseudo-image.shush {
+  background-image: url("../images/shush.png");
 }
 
 div.pseudo-image.no-steal {

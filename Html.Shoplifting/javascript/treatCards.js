@@ -1,4 +1,5 @@
 define([
+  "dojo/dom-style",
   "sharedJavascript/cards",
   "sharedJavascript/htmlUtils",
   "sharedJavascript/debugLog",
@@ -6,7 +7,15 @@ define([
   "javascript/types",
   "javascript/utils",
   "dojo/domReady!",
-], function (cards, htmlUtils, debugLogModule, gameData, types, utils) {
+], function (
+  domStyle,
+  cards,
+  htmlUtils,
+  debugLogModule,
+  gameData,
+  types,
+  utils,
+) {
   var debugLog = debugLogModule.debugLog;
 
   var _treatCardConfigs = null;
@@ -15,8 +24,8 @@ define([
       return _treatCardConfigs;
     }
 
-    var rawTreat0CardConfigs = gameData.treat0CardConfigs;
-    var rawTreat1CardConfigs = gameData.treat1CardConfigs;
+    var rawTreat0CardConfigs = types.treat0CardConfigs;
+    var rawTreat1CardConfigs = types.treat1CardConfigs;
 
     // Fill in some basic data true for all low end configs.
     var updatedTreat0CardConfigs = [];
@@ -123,7 +132,7 @@ define([
       return null;
     }
     var oneShotType =
-      gameData.oneShotTypesArray[index % gameData.oneShotTypesArray.length];
+      types.oneShotTypesArray[index % types.oneShotTypesArray.length];
 
     var oneShotNode = htmlUtils.addImage(
       parent,
@@ -163,6 +172,13 @@ define([
       "card-front-" + index,
     );
 
+    // If there's a color, use that for border color.
+    if (config.color) {
+      domStyle.set(cardFrontNode, {
+        borderColor: config.color,
+      });
+    }
+
     // Info in corners.
     addPointsNode(cardFrontNode, config);
     addStealingNode(cardFrontNode, config);
@@ -180,6 +196,12 @@ define([
       "title",
       config.name,
     );
+
+    if (config.color) {
+      domStyle.set(titleNode, {
+        "background-color": config.color,
+      });
+    }
 
     maybeAddOneShotNode(middleNode, config, index);
 

@@ -28,7 +28,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 5px solid black;
+  border: 12px solid black;
   position: relative;
 }
 .card.front .card-stats {
@@ -38,8 +38,8 @@
   font-weight: bold;
   border: 2px solid black;
   border-radius: 20px;
-  padding-left: 5px;
-  padding-right: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 .card.front .points {
@@ -70,11 +70,14 @@
   gap: 10px;
 }
 .card.front .middle .title {
-  padding-top: 20px;
   font-size: 30px;
-  margin-top: 10px;
+  margin-top: 50px;
+  padding: 5px;
   font-weight: bold;
   color: black;
+  border: 4px solid black;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 grey, 1px 1px 0 grey;
 }
 .card.front .middle .token {
@@ -87,8 +90,8 @@
 
 .card.back.card-tier-0,
 .card.front.card-tier-0 {
-  border-color: #B87333;
-  background: linear-gradient(to bottom, #f5e6c8 0%, #efe0c0 50%, #f5e6c8 100%);
+  border-color: #dbbd7c;
+  background: linear-gradient(to bottom, #f5e6c8 0%, #ffffee 100%);
 }
 
 .card.back.card-tier-1,

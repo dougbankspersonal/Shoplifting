@@ -52,7 +52,16 @@ body .boards .row-of-boards {
   padding: 5px 10px;
   -webkit-text-stroke: 1px rgba(200, 200, 200, 0.7);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  background: linear-gradient(135deg, #8f8500 0%, #d4af37 25%, #fff2a6 38%, #d4af37 50%, #b8962e 62%, #fff2a6 75%, #9a7c00 100%);
+  /*
+  background: linear-gradient(135deg,
+      #8f8500 0%,
+      #d4af37 25%,
+      #fff2a6 38%,
+      #d4af37 50%,
+      #b8962e 62%,
+      #fff2a6 75%,
+      #9a7c00 100%);
+      */
   text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 grey, 1px 1px 0 grey;
 }
 .title-board .move-die {

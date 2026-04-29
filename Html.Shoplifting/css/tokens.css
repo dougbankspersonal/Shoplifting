@@ -16,6 +16,9 @@ body .tokens .steal.token .token-text {
 }
 body .tokens .boy.token.back .token-text {
   font-size: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 body .tokens .token {
   overflow: hidden;
@@ -31,6 +34,7 @@ body .tokens .token {
   width: 256px;
   height: 256px;
   flex-direction: column;
+  box-sizing: border-box;
 }
 body .tokens .token .token-text {
   font-size: 150px;
