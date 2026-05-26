@@ -28,7 +28,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 12px solid black;
+  border: 16px solid black;
   position: relative;
 }
 .card.front .card-stats {
@@ -67,12 +67,11 @@
   justify-content: center;
   align-items: center;
   width: 94%;
-  gap: 10px;
 }
 .card.front .middle .title {
-  font-size: 30px;
+  font-size: 35px;
   margin-top: 50px;
-  padding: 5px;
+  padding: 10px;
   font-weight: bold;
   color: black;
   border: 4px solid black;

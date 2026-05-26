@@ -39,6 +39,7 @@ body .tokens .token {
 body .tokens .token .token-text {
   font-size: 150px;
 }
+body .tokens .token .double-steal,
 body .tokens .token .noise-die,
 body .tokens .token .steal {
   width: 128px;

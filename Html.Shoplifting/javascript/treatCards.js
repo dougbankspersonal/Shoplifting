@@ -190,9 +190,13 @@ define([
       "middle-" + index,
     );
 
+    var titleClasses = ["title"];
+    if (config.tier == 1) {
+      titleClasses.push("shiny-gold");
+    }
     var titleNode = htmlUtils.addDiv(
       middleNode,
-      ["title"],
+      titleClasses,
       "title",
       config.name,
     );

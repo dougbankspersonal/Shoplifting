@@ -94,9 +94,10 @@ define([
   }
 
   function generatePerBoyTokenConfigs() {
-    var boyStealTokenConfigs = [];
-    var boySideTwoTokenConfigs = [];
-    var boySideOneTokenConfigs = [];
+    var boySide1Configs = [];
+    var boySide2Configs = [];
+    var stealSide1Configs = [];
+    var stealSide2Configs = [];
 
     for (var i = 0; i < types.schoolboyConfigs.length; i++) {
       var schoolboyConfig = types.schoolboyConfigs[i];
@@ -125,7 +126,7 @@ define([
       var tokenColorFamily =
         gameData.playerColorFamilies[schoolboyConfig.family];
 
-      var stealConfig = {
+      var boySide1StealConfig = {
         text: boyFirstInitial,
         tokenColorFamily: tokenColorFamily,
         images: [types.iconTypes.steal],
@@ -135,7 +136,19 @@ define([
           "family-" + schoolboyConfig.family,
         ],
       };
-      boyStealTokenConfigs.push(stealConfig);
+      stealSide1Configs.push(boySide1StealConfig);
+
+      var boySide2StealConfig = {
+        text: boyFirstInitial,
+        tokenColorFamily: tokenColorFamily,
+        images: ["double-steal"],
+        classes: [
+          types.iconTypes.steal,
+          "square",
+          "family-" + schoolboyConfig.family,
+        ],
+      };
+      stealSide2Configs.push(boySide2StealConfig);
 
       var boySideOneTokenConfig = {
         text: boyFirstInitial,
@@ -144,7 +157,7 @@ define([
         tokenColorFamily: tokenColorFamily,
       };
 
-      boySideOneTokenConfigs.push(boySideOneTokenConfig);
+      boySide1Configs.push(boySideOneTokenConfig);
 
       var boySideTwoTokenConfig = {
         text: boyFirstInitial,
@@ -152,11 +165,12 @@ define([
         classes: ["boy", "back", "family-" + schoolboyConfig.family],
         tokenColorFamily: tokenColorFamily,
       };
-      boySideTwoTokenConfigs.push(boySideTwoTokenConfig);
+      boySide2Configs.push(boySideTwoTokenConfig);
     }
-    return boyStealTokenConfigs.concat(
-      boySideOneTokenConfigs,
-      boySideTwoTokenConfigs,
+    return boySide1Configs.concat(
+      boySide2Configs,
+      stealSide1Configs,
+      stealSide2Configs,
     );
   }
 

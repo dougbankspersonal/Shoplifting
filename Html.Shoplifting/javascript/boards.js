@@ -74,7 +74,7 @@ define([
 
       var boyNameNode = htmlUtils.addDiv(
         leftTextNode,
-        ["boy-name"],
+        ["boy-name", "shiny-metal"],
         "boy-name-" + boyIndex,
         boyName,
       );
@@ -90,7 +90,7 @@ define([
         treat0Name,
       );
       domStyle.set(favoriteNode, {
-        "background-color": treat0Color,
+        background: treat0Color,
       });
 
       htmlUtils.addImage(titleBoardNode, ["move-die"], "move-die");
