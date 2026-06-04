@@ -4,18 +4,9 @@ define([
   "sharedJavascript/htmlUtils",
   "sharedJavascript/debugLog",
   "javascript/gameData",
-  "javascript/types",
   "javascript/utils",
   "dojo/domReady!",
-], function (
-  domStyle,
-  cards,
-  htmlUtils,
-  debugLogModule,
-  gameData,
-  types,
-  utils,
-) {
+], function (domStyle, cards, htmlUtils, debugLogModule, gameData, utils) {
   var debugLog = debugLogModule.debugLog;
 
   var _treatCardConfigs = null;
@@ -24,8 +15,8 @@ define([
       return _treatCardConfigs;
     }
 
-    var rawTreat0CardConfigs = types.treat0CardConfigs;
-    var rawTreat1CardConfigs = types.treat1CardConfigs;
+    var rawTreat0CardConfigs = gameData.treat0CardConfigs;
+    var rawTreat1CardConfigs = gameData.treat1CardConfigs;
 
     // Fill in some basic data true for all low end configs.
     var updatedTreat0CardConfigs = [];
@@ -76,7 +67,7 @@ define([
       noiseString,
       false,
       stealingConfig,
-      types.iconTypes.noise,
+      gameData.iconTypes.noise,
     );
 
     var stealString = "";
@@ -84,7 +75,7 @@ define([
       stealString,
       false,
       stealingConfig,
-      types.iconTypes.steal,
+      gameData.iconTypes.steal,
     );
 
     var finalString;
@@ -112,7 +103,7 @@ define([
     var saveString =
       "<span class='save'>" + rewardsConfig.pocketPoints + "</span>";
     var finalString =
-      types.iconStrings[types.iconTypes.reward] +
+      gameData.iconStrings[gameData.iconTypes.reward] +
       ":" +
       consumeString +
       "/" +
@@ -132,7 +123,7 @@ define([
       return null;
     }
     var oneShotType =
-      types.oneShotTypesArray[index % types.oneShotTypesArray.length];
+      gameData.oneShotTypesArray[index % gameData.oneShotTypesArray.length];
 
     var oneShotNode = htmlUtils.addImage(
       parent,
@@ -140,6 +131,16 @@ define([
       "one-shot-" + index,
     );
     return oneShotNode;
+  }
+
+  function addInfoStripe(parent, config) {
+    var infoStripeNode = htmlUtils.addDiv(
+      parent,
+      ["info-stripe"],
+      "info-stripe",
+    );
+    addPointsNode(infoStripeNode, config);
+    addStealingNode(infoStripeNode, config);
   }
 
   function addCardFrontAtIndex(parent, index) {
@@ -179,33 +180,31 @@ define([
       });
     }
 
-    // Info in corners.
-    addPointsNode(cardFrontNode, config);
-    addStealingNode(cardFrontNode, config);
+    addInfoStripe(cardFrontNode, config);
 
     // Middle: title and powers.
+    var middleClasses = ["middle"];
+    if (config.tier > 0) {
+      middleClasses.push("shiny-gold");
+    }
     var middleNode = htmlUtils.addDiv(
       cardFrontNode,
-      ["middle"],
+      middleClasses,
       "middle-" + index,
     );
+    if (config.color) {
+      domStyle.set(middleNode, {
+        "background-color": config.color,
+      });
+    }
 
     var titleClasses = ["title"];
-    if (config.tier == 1) {
-      titleClasses.push("shiny-gold");
-    }
     var titleNode = htmlUtils.addDiv(
       middleNode,
       titleClasses,
       "title",
       config.name,
     );
-
-    if (config.color) {
-      domStyle.set(titleNode, {
-        "background-color": config.color,
-      });
-    }
 
     maybeAddOneShotNode(middleNode, config, index);
 

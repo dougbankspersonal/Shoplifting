@@ -1,11 +1,9 @@
 define([
   "sharedJavascript/genericUtils",
-  "sharedJavascript/htmlUtils",
   "sharedJavascript/debugLog",
   "javascript/gameData",
-  "javascript/types",
   "dojo/domReady!",
-], function (genericUtils, htmlUtils, debugLogModule, gameData, types) {
+], function (genericUtils, debugLogModule, gameData) {
   var debugLog = debugLogModule.debugLog;
 
   var getRandomZeroToOne =
@@ -35,7 +33,7 @@ define([
       "<span class=" +
       iconType +
       ' icon">' +
-      types.iconStrings[iconType] +
+      gameData.iconStrings[iconType] +
       "</span>";
 
     if (value == 1) {
@@ -58,67 +56,6 @@ define([
     return dieRoll;
   }
 
-  function getActionString(powerConfig, opt_dieRoll) {
-    var evolvingString = "";
-    var somethingPrior = false;
-
-    if (opt_dieRoll) {
-      console.assert(
-        opt_dieRoll >= 1 && opt_dieRoll <= gameData.numDieFaces,
-        "Invalid die roll",
-      );
-      var index = opt_dieRoll - 1;
-      var dieString = types.dieStrings[index];
-      evolvingString = "<span class=die-roll>" + dieString + "</span>:";
-    }
-
-    [evolvingString, somethingPrior] = maybeAppendIcons(
-      evolvingString,
-      somethingPrior,
-      powerConfig,
-      types.iconTypes.move,
-    );
-
-    [evolvingString, somethingPrior] = maybeAppendIcons(
-      evolvingString,
-      somethingPrior,
-      powerConfig,
-      types.iconTypes.noise,
-    );
-    [evolvingString, somethingPrior] = maybeAppendIcons(
-      evolvingString,
-      somethingPrior,
-      powerConfig,
-      types.iconTypes.steal,
-    );
-    [evolvingString, somethingPrior] = maybeAppendIcons(
-      evolvingString,
-      somethingPrior,
-      powerConfig,
-      types.iconTypes.reroll,
-    );
-
-    return evolvingString;
-  }
-
-  function addActionsNode(parent, powerConfig, opt_dieRoll) {
-    var string = getActionString(powerConfig, opt_dieRoll);
-
-    return htmlUtils.addDiv(parent, ["actions"], "actions", string);
-  }
-
-  // Add a node describing what happens with a particular die roll.
-  // If the config has a die roll, use that.
-  // Otherwise use a random die roll.
-  function addDieConfigNode(parent, dieConfig) {
-    debugLog("addDieConfigNode", "dieConfig = ", JSON.stringify(dieConfig));
-    debugLog("addDieConfigNode", "gameData = ", JSON.stringify(gameData));
-
-    var dieRoll = getDieRollFromConfig(dieConfig);
-
-    return addActionsNode(parent, dieConfig, dieRoll);
-  }
-
   function scaleTextInDivs(className) {
     const elements = document.querySelectorAll(className);
 
@@ -137,9 +74,6 @@ define([
   // This returned object becomes the defined value of this module
   return {
     maybeAppendIcons: maybeAppendIcons,
-    addDieConfigNode: addDieConfigNode,
-    addActionsNode: addActionsNode,
     scaleTextInDivs: scaleTextInDivs,
-    getActionString: getActionString,
   };
 });

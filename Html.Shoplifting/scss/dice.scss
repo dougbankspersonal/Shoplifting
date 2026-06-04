@@ -1,0 +1,26 @@
+body {
+  font-family: Georgia, "Times New Roman", serif;
+
+  .die-faces {
+    display: flex;
+    flex-direction: column;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+
+    .row-of-die-faces {
+      display: flex;
+      flex-direction: row;
+
+      .die-face {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        overflow: hidden;
+        align-items: center;
+        z-index: 1;
+        width: 256px;
+        height: 256px;
+        font-weight: bold;
+      }
+    }
+  }
+}

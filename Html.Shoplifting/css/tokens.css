@@ -10,54 +10,77 @@ body .tokens .row-of-tokens {
   display: flex;
   flex-direction: row;
 }
-body .tokens .boy.token .token-text,
-body .tokens .steal.token .token-text {
-  font-size: 60px;
-}
-body .tokens .boy.token.back .token-text {
-  font-size: 150px;
+body .tokens .row-of-tokens .token {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
-}
-body .tokens .token {
   overflow: hidden;
-  display: flex;
-  justify-content: center;
   align-items: center;
   border-radius: 50%;
   border-style: solid;
   border-width: 10px;
-  font-weight: bold;
+  box-sizing: border-box;
   z-index: 1;
-  position: relative;
   width: 256px;
   height: 256px;
-  flex-direction: column;
-  box-sizing: border-box;
+  font-weight: bold;
+  position: relative;
 }
-body .tokens .token .token-text {
+body .tokens .row-of-tokens .token .token-text {
   font-size: 150px;
 }
-body .tokens .token .double-steal,
-body .tokens .token .noise-die,
-body .tokens .token .steal {
+body .tokens .row-of-tokens .token .double-steal,
+body .tokens .row-of-tokens .token .steal {
+  width: 128px;
+  height: 128px;
+}
+body .tokens .row-of-tokens .token .noise-die {
   width: 128px;
   height: 128px;
   border-radius: 15px;
   border: rgb(0, 0, 0) solid 5px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
-body .tokens .token.square {
+body .tokens .row-of-tokens .token.steal .token-text {
+  position: absolute;
+  bottom: 5px;
+  right: 10px;
+}
+body .tokens .row-of-tokens .token.steal .double-steal,
+body .tokens .row-of-tokens .token.steal .steal {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  height: 150px;
+  width: 150px;
+}
+body .tokens .row-of-tokens .token.square {
   border-radius: 16px;
 }
-body .tokens .token.teacher {
+body .tokens .row-of-tokens .token.teacher {
   border-color: #243483;
   background: linear-gradient(to bottom, #eeeeff 0%, #ddddee 100%);
 }
-body .tokens .token.demerit {
+body .tokens .row-of-tokens .token.demerit {
   border-color: #333333;
   background: linear-gradient(to bottom, #222222 0%, #555555 50%, #777777 100%);
+}
+body .tokens .row-of-tokens .boy.token .pseudo-image {
+  width: 150px;
+  height: 150px;
+}
+body .tokens .row-of-tokens .boy.token .token-text,
+body .tokens .row-of-tokens .steal.token .token-text {
+  font-size: 60px;
+}
+body .tokens .row-of-tokens .boy.token.not-moved .token-text {
+  font-size: 140px;
+}
+body .tokens .row-of-tokens .boy.token.back .token-text {
+  font-size: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /*# sourceMappingURL=tokens.css.map */

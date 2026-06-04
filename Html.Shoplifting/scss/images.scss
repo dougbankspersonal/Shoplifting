@@ -1,8 +1,34 @@
+div.pseudo-image.noise-1 {
+  background-image: url("../images/noise-1.png");
+}
+
+div.pseudo-image.noise-2 {
+  background-image: url("../images/noise-2.png");
+}
+
+div.pseudo-image.noise-3 {
+  background-image: url("../images/noise-3.png");
+}
+
+div.pseudo-image.knapsack {
+  background-image: url("../images/knapsack.png");
+}
+
+div.pseudo-image.eaten {
+  background-image: url("../images/eaten.png");
+}
+
+div.pseudo-image.tokens {
+  background-image: url("../images/tokens.png");
+}
+
+div.pseudo-image.demerits {
+  background-image: url("../images/demerits.png");
+}
+
 div.pseudo-image.pips-0 {
   background-image: url("../images/pips-0.png");
 }
-
-
 
 div.pseudo-image.pips-1 {
   background-image: url("../images/pips-1.png");
@@ -40,27 +66,16 @@ div.pseudo-image.secret-passage {
   background-image: url("../images/secret-passage.png");
 }
 
-/*
-    FlipDie: oneShotTypeFlipDie,
-    ExtraSteal: oneShotTypeExtraSteal,
-    Persuasion: oneShotTypePersuasion,
-    Reroll: oneShotTypeReroll,
-    CherryBomb: oneShotTypeCherryBomb,
-    Counterclockwise: oneShotTypeCounterclockwise,
-    Hide: oneShotTypeHide,
-    Shush: oneShotTypeShush,
-*/
-
 div.pseudo-image.flip-die {
   background-image: url("../images/flip-die.png");
 }
 
-div.pseudo-image.extra-steal {
-  background-image: url("../images/extra-steal.png");
-}
-
 div.pseudo-image.double-steal {
   background-image: url("../images/double-steal.png");
+}
+
+div.pseudo-image.double-steal-backed {
+  background-image: url("../images/double-steal-backed.png");
 }
 
 div.pseudo-image.persuasion {

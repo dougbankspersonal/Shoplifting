@@ -2,86 +2,93 @@ define([
   "dojo/dom",
   "dojo/dom-style",
   "sharedJavascript/genericMeasurements",
-  "sharedJavascript/genericUtils",
   "sharedJavascript/htmlUtils",
   "sharedJavascript/debugLog",
+  "sharedJavascript/screentop/seatColors",
   "javascript/gameData",
-  "javascript/types",
-  "javascript/utils",
   "dojo/domReady!",
 ], function (
   dom,
   domStyle,
   genericMeasurements,
-  genericUtils,
   htmlUtils,
   debugLogModule,
+  seatColors,
   gameData,
-  types,
-  utils,
 ) {
   var debugLog = debugLogModule.debugLog;
 
-  var poofedCardWidth = genericMeasurements.standardCardWidthPx * 1.1;
-  var poofedCardHeight = genericMeasurements.standardCardHeightPx * 1.1;
-  var standardBoardWidth = poofedCardHeight + 24;
-
-  function addStandardBoards(parent, boardClass, boardTitle) {
-    for (var i = 0; i < gameData.numPlayers; i++) {
-      var classes = [boardClass, "all-board", "standard-board"];
+  function addStandardBoards(parent, boardAndImageClass, boardTitle) {
+    for (var seatIndex = 0; seatIndex < gameData.numPlayers; seatIndex++) {
+      var classes = [boardAndImageClass, "all-board", "standard-board"];
       var boardNode = htmlUtils.addDiv(
         parent,
         classes,
-        boardClass + "-board-" + i,
+        boardAndImageClass + "-board-" + seatIndex,
       );
       var titleWrapperNode = htmlUtils.addDiv(
         boardNode,
         ["title-wrapper"],
-        "title-wrapper-" + i,
+        "title-wrapper-" + seatIndex,
       );
 
-      var titleNode = htmlUtils.addDiv(
+      htmlUtils.addDiv(
         titleWrapperNode,
         ["title"],
-        "title-" + i,
+        "title-" + seatIndex,
         boardTitle,
       );
 
       var innerBoardNode = htmlUtils.addDiv(
         boardNode,
-        ["inner-board", "family-" + i],
-        "inner-board-" + i,
+        ["inner-board"],
+        "inner-board-" + seatIndex,
       );
+
+      htmlUtils.addImage(
+        innerBoardNode,
+        [boardAndImageClass],
+        boardAndImageClass + "-" + seatIndex,
+      );
+
+      var colorFamily = seatColors.getLightColorFamilyForSeat(seatIndex);
+      colorFamily.gradient1 = "#fff";
+      htmlUtils.applyColorFamily(boardNode, colorFamily);
     }
   }
 
-  function addTitleBoards(parent, boyByPlayerIndex) {
-    for (var i = 0; i < gameData.numPlayers; i++) {
-      var boyIndex = i * gameData.boysPerPlayer + boyByPlayerIndex;
-      var boyName = types.schoolboyConfigs[boyIndex].name;
-      var classes = ["title-board", "all-board", "family-" + i];
-      var titleBoardNode = htmlUtils.addDiv(
+  function addNameBoards(parent, boyByPlayerIndex) {
+    for (var seatIndex = 0; seatIndex < gameData.numPlayers; seatIndex++) {
+      var boyIndex = seatIndex * gameData.boysPerPlayer + boyByPlayerIndex;
+      var boyConfig = gameData.boyConfigs[boyIndex];
+      var boyName = boyConfig.name;
+
+      var classes = ["name-board", "all-board"];
+      var nameBoardNode = htmlUtils.addDiv(
         parent,
         classes,
-        "title-board-" + boyIndex,
+        "name-board-" + boyIndex,
       );
 
       var leftTextNode = htmlUtils.addDiv(
-        titleBoardNode,
+        nameBoardNode,
         ["left-text"],
         "left-text-" + boyIndex,
       );
 
+      var treatConfig = boyConfig.favoriteTreatConfig;
+      var treat0Name = treatConfig.name;
+      var treat0Color = treatConfig.color;
+      domStyle.set(leftTextNode, {
+        background: treat0Color,
+      });
+
       var boyNameNode = htmlUtils.addDiv(
         leftTextNode,
-        ["boy-name", "shiny-metal"],
+        ["boy-name"],
         "boy-name-" + boyIndex,
         boyName,
       );
-
-      var treats0Count = types.treat0CardConfigs.length;
-      var treat0Name = types.treat0CardConfigs[boyIndex % treats0Count].name;
-      var treat0Color = types.treat0CardConfigs[boyIndex % treats0Count].color;
 
       var favoriteNode = htmlUtils.addDiv(
         leftTextNode,
@@ -89,20 +96,20 @@ define([
         "favorite-" + boyIndex,
         treat0Name,
       );
-      domStyle.set(favoriteNode, {
-        background: treat0Color,
-      });
 
-      htmlUtils.addImage(titleBoardNode, ["move-die"], "move-die");
+      htmlUtils.addImage(nameBoardNode, ["move-die"], "move-die");
+      var colorFamily = seatColors.getLightColorFamilyForSeat(seatIndex);
+      colorFamily.gradient1 = "#fff";
+      htmlUtils.applyColorFamily(nameBoardNode, colorFamily);
     }
   }
 
-  function addPocketBoards(parent) {
-    addStandardBoards(parent, "pocket", "Pocket");
+  function addKnapsackBoards(parent) {
+    addStandardBoards(parent, "knapsack", "Knapsack");
   }
 
-  function addTummyBoards(parent) {
-    addStandardBoards(parent, "tummy", "Tummy");
+  function addEatenBoards(parent) {
+    addStandardBoards(parent, "eaten", "Eaten");
   }
 
   function addTokensBoards(parent) {
@@ -120,22 +127,47 @@ define([
 
     var rowOfBoardsNode;
 
-    var wrapperNode = htmlUtils.addDiv(boardsNode, ["wrapper"], "wrapper");
+    var nameBoardsWrapperNode = htmlUtils.addDiv(
+      boardsNode,
+      ["name-boards-wrapper"],
+      "name-boards-wrapper",
+    );
     for (var i = 0; i < gameData.boysPerPlayer; i++) {
-      rowOfBoardsNode = htmlUtils.addDiv(wrapperNode, ["row-of-boards"]);
-      addTitleBoards(rowOfBoardsNode, i);
+      rowOfBoardsNode = htmlUtils.addDiv(
+        nameBoardsWrapperNode,
+        ["row-of-boards"],
+        "names-row-" + i,
+      );
+      debugLog("addBoards", "rowOfBoardsNode = ", rowOfBoardsNode);
+      addNameBoards(rowOfBoardsNode, i);
     }
 
-    rowOfBoardsNode = htmlUtils.addDiv(boardsNode, ["row-of-boards"]);
-    addPocketBoards(rowOfBoardsNode);
+    rowOfBoardsNode = htmlUtils.addDiv(
+      boardsNode,
+      ["row-of-boards"],
+      "knapsack-row",
+    );
+    addKnapsackBoards(rowOfBoardsNode);
 
-    rowOfBoardsNode = htmlUtils.addDiv(boardsNode, ["row-of-boards"]);
-    addTummyBoards(rowOfBoardsNode);
+    rowOfBoardsNode = htmlUtils.addDiv(
+      boardsNode,
+      ["row-of-boards"],
+      "eaten-row",
+    );
+    addEatenBoards(rowOfBoardsNode);
 
-    rowOfBoardsNode = htmlUtils.addDiv(boardsNode, ["row-of-boards"]);
+    rowOfBoardsNode = htmlUtils.addDiv(
+      boardsNode,
+      ["row-of-boards"],
+      "tokens-row",
+    );
     addTokensBoards(rowOfBoardsNode);
 
-    rowOfBoardsNode = htmlUtils.addDiv(boardsNode, ["row-of-boards"]);
+    rowOfBoardsNode = htmlUtils.addDiv(
+      boardsNode,
+      ["row-of-boards"],
+      "demerits-row",
+    );
     addDemeritsBoards(rowOfBoardsNode);
   }
 
